@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to my Portfolio" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Tab -->
+    <link id='favicon' rel="shortcut icon" href="./images/logo.png" type="image/x-png">
+    <title>Eva Sabeeh | Portfolio</title>
+</head>
+<body oncontextmenu="return false">
+
+<canvas id="canvas"></canvas>             <!--mouse effect-->
+
+
+
+
+<nav class="nav">
+    <ul class="nav__list">
+        <a href="#education" class="nav__link">
+            <i class="fas fa-graduation-cap"></i>
+            <span class="nav__name">Edcucation</span>
+        </a>
+        <a href="#skills" class="nav__link">
+            <i class="fas fa-laptop-code"></i>
+            <span class="nav__name">Skills</span>
+        </a>
+        <a href="#about" class="nav__link">
+          <i class="fa fa-address-book"></i>
+          <span class="nav__name">About</span>
+        </a>
+        <a href="#home" class="nav__link">
+          <i class="fas fa-home"></i>
+          <span class="nav__name">Home</span>
+        </a>
+        <a href="#work" class="nav__link">
+            <i class="fas fa-briefcase"></i>
+            <span class="nav__name">Projects</span>
+        </a>
+        <a href="#profiles" class="nav__link">
+          <i class="fas fa-user-alt"></i>
+          <span class="nav__name">Other Profiles</span>
+        </a>
+        <a href="#contact" class="nav__link">
+          <i class="fas fa-phone-alt"></i>
+          <span class="nav__name">Contact</span>
+        </a>
+    </ul>
+</nav> 
+
+
+
+<!-- Landing page -->
+<section class="home" id="home">
+  <div class="wrapper">          <!--Animation-->
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+    <div class="content">
+    <h2>Hey there,<br/> I'm Eva <span>Sabeeh.</span></h2>
+    <p>I am into <span class="typing-text"></span></p>
+    <a href="https://drive.google.com/file/d/1bl4uwfV8MdEZQ8FeSAEiLNzOOcW1i6xC/view?usp=drive_link" target="_blank" class="btn"><span>Resume</span><i class="fas fa-chevron-right"></i></a>
+    <div class="socials">
+        <ul class="social-icons">
+          <li><a class="linkedin" aria-label="LinkedIn" href="https://www.linkedin.com/in/eva-sabeeh/" target="_blank"><i class="fab fa-linkedin"></i></a></li> 
+          <li><a class="telegram" aria-label="Telegram" href="https://t.me/evasabeeh" target="_blank"><i class="fab fa-telegram-plane"></i></a></li>
+          <li><a class="mail" aria-label="Mail" href="mailto:evasabeeh@gmail.com"><i class="fas fa-envelope" target="_blank"></i></a></li>
+          <li><a class="github" aria-label="GitHub" href="https://github.com/evasabeeh" target="_blank"><i class="fab fa-github"></i></a></li>
+        </ul>
+      </div>
+    </div>
+<div class="image">
+    <img draggable="false" class="tilt" src="./images/poster.png" alt="">
+</div>
+</section>
+
+
+
+<!-- About -->
+<section class="about" id="about">
+    <h2 class="heading"><i class="fas fa-user-alt"></i> About <span>Me</span></h2>
+    <div class="row">
+    <div class="content">
+      <br><br><br>
+        <h3>I'm Eva</h3>
+        <span class="tag">BE-CSE | CU'25</span>
+        <p>I am a <span>Computer Science Undergraduate student</span> at Chandigarh University, Punjab, India.</p>
+        <P>Being a keen learner, I was always passionate about exploring new areas in the tech world. I have experience with several programming languages like Java, SQL... while my proficiency lies in C++. I aim to utilize my tech skills to develop innovative solutions that can elevate technological progress while further seeking opportunities for my contributions in the field that aligns with my skills and interests.</p>
+        <br>
+        <div class="box-container">
+            <div class="box">
+              <p>Mail : <span> evasabeeh@gmail.com</span></p>
+              <p>Place : <span> Lucknow, Uttar Pradesh, India - 226026</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="image">
+      <img draggable="false" class="tilt" src="./images/dp-img.jpg" alt="">
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Skills -->
+<section class="skills" id="skills">
+    <h2 class="heading"><i class="fas fa-laptop-code"></i> My <span>Skills</span></h2>
+    <div class="container">
+          <div class="row" id="skillsContainer">
+            <div class="bar">
+              <div class="info">
+                <img src="images\skills\c-icon.png"/>
+                <span>C++</span>
+              </div>
+            </div>
+            <div class="bar">
+              <div class="info">
+                <img src="images\skills\java-icon.png"/>
+                <span>Java</span>
+              </div>
+            </div>
+            <div class="bar">
+              <div class="info">
+                <img src="images\skills\figma-icon.png"/>
+                <span>Figma</span>
+              </div>
+            </div>
+            <div class="bar">
+              <div class="info">
+                <img src="images\skills\github-icon.png"/>
+                <span>GitHub</span>
+              </div>
+            </div>
+            <div class="bar">
+              <div class="info">
+                <img src="images\skills\git-icon.png"/>
+                <span>Git</span>
+              </div>
+            </div>
+            <div class="bar">
+              <div class="info">
+                <img src="images\skills\html-icon.png"/>
+                <span>HTML</span>
+              </div>
+            </div>
+            <div class="bar">
+              <div class="info">
+                <img src="images\skills\css-icon.png"/>
+                <span>CSS</span>
+              </div>
+            </div>
+            <div class="bar">
+              <div class="info">
+                <img src="images\skills\sql-icon.png"/>
+                <span>SQL</span>
+              </div>
+            </div>
+            <div class="bar">
+              <div class="info">
+                <img src="images\skills\bootstrap-icon.png"/>
+                <span>Bootstrap</span>
+              </div>
+            </div>
+            <div class="bar">
+              <div class="info">
+                <img src="images\skills\vs-icon.png"/>
+                <span>VS Code</span>
+              </div>
+            </div>
+      </div>
+</div>
+</section>
+
+
+
+<!--Education-->
+<section class="experience" id="experience">
+  <h2 class="heading"><i class="fas fa-graduation-cap"></i> My <span>Education</span></h2>
+<br>
+  <div class="timeline">
+    <div class="container right">
+      <div class="content">
+        <div class="tag">
+          <h2>CHANDIGARH UNIVERSITY, PUNJAB, IN</h2>
+        </div>
+        <div class="desc">
+            <h3>Bachelor of Engineering | Computer Science</h3>
+            <p>2021 - 2025 (Pursuing)</p>
+        </div>
+      </div>
+    </div>
+    <div class="container left">
+      <div class="content">
+        <div class="tag">
+          <h2>SPRING DALE COLLEGE, UP, IN</h2>
+        </div>
+        <div class="desc">
+            <h3>Intermediate | ISC</h3>
+            <p>2020 - 2021</p>
+        </div>
+      </div>
+    </div>
+    <div class="container right">
+      <div class="content">
+        <div class="tag">
+          <h2>SPRING DALE COLLEGE, UP, IN</h2>
+        </div>
+        <div class="desc">
+            <h3>Matriculation | ICSE</h3>
+            <p>2018 - 2019</p>
+        </div>
+      </div>
+    </div>
+</div>
+</section>
+
+
+
+<!-- Projects -->
+<section class="work" id="work">
+  <h2 class="heading"><i class="fas fa-laptop-code"></i> My <span>Projects</span></h2>
+  <div class="box-container">
+    <div class="box tilt">
+      <img draggable="false" src="images\projects\portfolio.png" alt="" />
+      <div class="content">
+        <div class="tag">
+        <h3>Portfolio Website</h3>
+        </div>
+        <div class="desc">
+          <p><b>Bingo! You're already here.</b></p>
+          <p>HTML, CSS, JS</p>
+          <div class="btns">
+            <a href="#" class="btn" target="_blank">View <i class="fas fa-eye"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box tilt">
+      <img draggable="false" src="images\projects\route.png" alt="" />
+      <div class="content">
+        <div class="tag">
+          <h3>Optimized Travel Route Planner</h3>
+        </div>
+        <div class="desc">
+          <p>C, C++ - Plans the most optimal route as shortest or fastest using Dijkstra's algorithm.</p>
+          <div class="btns">
+            <a href="#" class="btn" target="_blank"><i class="fas fa-eye"></i> View</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box tilt">
+      <img draggable="false" src="images\projects\melofy.png" alt="" />
+      <div class="content">
+        <div class="tag">
+        <h3>Melofy - Spotify inspired app</h3>
+        </div>
+        <div class="desc">
+          <p>Kotlin, Jetpack Compose, Retrofit, Material UI - Playbacks available fetched from Spotify Developer API. It also uses Exoplayer for media playing and several APIs such as Hilt etc.</p>
+          <div class="btns">
+            <a href="#" class="btn" target="_blank"><i class="fas fa-eye"></i> View</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box tilt">
+      <img draggable="false" src="images\projects\bookmania.png" alt="" />
+      <div class="content">
+        <div class="tag">
+          <h3>Bookmania - Digitized bookstore</h3>
+        </div>
+        <div class="desc">
+          <p>HTML, CSS, JavaScript, SQL - Web-based online bookshop to buy & sell a wide variety of books, novels, etc.</p>
+          <div class="btns">
+            <a href="#" class="btn" target="_blank"><i class="fas fa-eye"></i> View</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</section>
+
+
+
+<!-- Other profiles -->
+<section class="skills" id="profiles">
+  <h2 class="heading"><i class="fas fa-user-alt"></i> Other <span>Profiles</span></h2>
+  <div class="container">
+        <div class="Prow" id="skillsContainer">
+          <div class="Pbar">
+            <div class="info">
+              <img src="images\profiles\leetcode.png"/>
+              <div class="btns">
+                <a href="https://leetcode.com/evasabeeh/" class="btn" target="_blank">LeetCode</a>
+              </div>
+            </div>
+          </div>
+          <div class="Pbar">
+            <div class="info">
+              <img src="images\profiles\hackerrank.png"/>
+              <div class="btns">
+                <a href="https://www.hackerrank.com/profile/evasabeeh" class="btn" target="_blank">HackerRank</a>
+              </div>
+            </div>
+          </div>
+          <div class="Pbar">
+            <div class="info">
+              <img src="images\profiles\gfg.png" />
+              <div class="btns">
+                <a href="https://www.geeksforgeeks.org/user/evas190401/" class="btn" target="_blank">GeeksforGeeks</a>
+              </div>
+            </div>
+          </div>
+          <div class="Pbar">
+            <div class="info">
+              <img src="images\profiles\codechef.png"/>
+              <div class="btns">
+                <a href="https://www.codechef.com/users/sodane1928" class="btn" target="_blank">CodeChef</a>
+              </div>
+            </div>
+          </div>
+          <div class="Pbar">
+            <div class="info">
+              <img src="images\profiles\github.png"/>
+              <div class="btns">
+                <a href="https://www.github.com/evasabeeh" class="btn" target="_blank">Github</a>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
+</section>
+
+
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <h2 class="heading"><i class="fas fa-headset"></i> Get in <span>Touch</span></h2>
+  <div class="container">
+    <div class="content">
+      <div class="image-box">
+        <img draggable="false" src="./images/contact-icon.png" alt="">
+      </div>
+    <form id="contact-form" action="https://formsubmit.co/evasabeeh@gmail.com" method="POST">
+      <div class="form-group">
+        <div class="field">
+          <input type="text" name="name" placeholder="Name" required>
+          <i class='fas fa-user'></i>
+        </div>
+        <div class="field">
+          <input type="email" name="email" placeholder="Email" required>
+          <i class='fas fa-envelope'></i>
+        </div>
+        <div class="field">
+          <input type="text" name="phone" placeholder="Phone">
+          <i class='fas fa-phone-alt'></i>
+        </div>
+        <div class="message">
+        <textarea placeholder="Message" name="message" required></textarea>
+        <i class="fas fa-comment-dots"></i>
+        </div>
+        </div>
+      <div class="button-area">
+        <button type="submit">Submit <i class="fa fa-paper-plane"></i></button>
+      </div>
+    </form>
+  </div>
+  </div>
+</section>
+
+
+
+<!--  Footer -->
+<section class="footer">
+  <h1 class="credit">Thank you for being here!</h1>
+</section>
+
+
+
+<!-- Java Scripts -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.5/typed.min.js" integrity="sha512-1KbKusm/hAtkX5FScVR5G36wodIMnVd/aP04af06iyQTkD17szAMGNmxfNH+tEuFp3Og/P5G32L1qEC47CZbUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js" integrity="sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
+
