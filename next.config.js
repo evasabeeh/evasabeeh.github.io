@@ -19,6 +19,7 @@ const withPWA = WithPWA({
 // @ts-ignore
 const config = withPWA({
   reactStrictMode: true,
+  output: "export", 
 
   /**
    * If you are using `appDir` then you must comment the below `i18n` config out.

@@ -14,6 +14,7 @@
 ## Built With
 
 <p>
+<img src="https://create.t3.gg/images/t3-light.svg" alt="t3" width="80" height="80"/>
 <img src="https://www.svgrepo.com/show/354113/nextjs-icon.svg" alt="next" width="80" height="80"/> 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/768px-Typescript_logo_2020.svg.png" alt="typescript" width="80" height="80"/>
 <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/tailwind-css-icon.png" alt="tailwind" width="80" height="80"/>
@@ -23,6 +24,7 @@
 
 ## Features
 
+- Project setup using t3-app
 - Responsive Design
 - Animation: tailwindcss-animate
 - Smooth scroll behaviour: Locomotive-scroll
@@ -39,7 +41,6 @@
 - Fast loading through Next.js
 - Carousel with smooth transitions
 - Rapid and efficient style with Tailwind CSS
-- Turbopack as build bundler for faster development
 
 
 ## Insights
