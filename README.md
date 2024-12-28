@@ -54,4 +54,3 @@
 ## Other commands
 - npx --no-install next build - Build
 - npm run dev - Run
-- next dev --turbopack
