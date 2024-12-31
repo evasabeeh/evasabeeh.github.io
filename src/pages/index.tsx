@@ -68,6 +68,12 @@ const projects = [
     image: "/assets/bookmania.png",
     href: "https://evasabeeh-bookmania.vercel.app/",
   },
+  {
+    title: "Online Food Ordering system",
+    description: "Full-stack real-time MERN app",
+    image: "/assets/food.png",
+    href: "https://fooddelivery-frontend-szy1.onrender.com/",
+  },
 ];
 
 const skills = [
