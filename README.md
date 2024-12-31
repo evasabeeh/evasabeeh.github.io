@@ -15,7 +15,7 @@
 
 <p>
 <img src="https://create.t3.gg/images/t3-light.svg" alt="t3" width="80" height="80"/>
-<img src="https://www.svgrepo.com/show/354113/nextjs-icon.svg" alt="next" width="80" height="80"/> 
+<img src="https://img.icons8.com/fluent-systems-filled/512/FFFFFF/nextjs.png" alt="next" width="80" height="80"/> 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/768px-Typescript_logo_2020.svg.png" alt="typescript" width="80" height="80"/>
 <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/tailwind-css-icon.png" alt="tailwind" width="80" height="80"/>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/900px-JavaScript-logo.png" alt="javascript" width="80" height="80"/>
