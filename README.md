@@ -4,7 +4,7 @@
   <h3 align="center">Personal Portfolio Website</h3>
 
   <p align="center">
-  Welcome to my digital portfolio, crafted using Next.js and TypeScript to deliver a highly interactive and dynamic experience. This fully responsive website ensures a seamless experience across all devices.<em>https://evasabeeh.github.io/</em>
+  Welcome to my digital portfolio, crafted using Next.js and TypeScript to deliver a highly interactive and dynamic experience. This fully responsive website ensures a seamless experience across all devices.
     <br/>
     <br/>
   </p>

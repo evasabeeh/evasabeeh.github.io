@@ -60,7 +60,7 @@ const projects = [
     title: "Melofy - Spotify inspired app",
     description: "An Android music playback application inspired by Spotify",
     image: "/assets/melofy.png",
-    href: "https://github.com/evasabeeh/Melofy.git",
+    href: "https://github.com/evasabeeh/Melofy/releases/tag/android-app",
   },
   {
     title: "Bookmania - Digitized Bookstore",
