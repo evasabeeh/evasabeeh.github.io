@@ -40,9 +40,10 @@ const variants = {
 const navLinks = [
   { href: "#home", text: "Home" },
   { href: "#about", text: "About" },
+  { href: "#experience", text: "Experience" },
   { href: "#skills", text: "Skills" },
   { href: "#projects", text: "Projects" },
-  { href: "#services", text: "Education" },
+  { href: "#education", text: "Education" },
 ];
 
 function handleClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
@@ -156,8 +157,8 @@ export default function Container(props: ContainerProps) {
           <Image
             src="assets/logo.png"
             alt="Eva Sabeeh"
-            width="25"
-            height="15"
+            width={25}
+            height={15}
             className="mx-5"
           />
         </Link>

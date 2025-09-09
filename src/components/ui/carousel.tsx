@@ -173,8 +173,9 @@ const CarouselPrevious = React.forwardRef<
       ref={ref}
       variant="ghost"
       className={cn(
-        "absolute h-10 w-10 rounded-full bg-transparent text-white border border-white transition-colors duration-200", // Transparent button with white arrow and border
-        "hover:bg-white hover:text-black",
+        "absolute h-10 w-10 rounded-full bg-black/20 backdrop-blur-sm text-white border border-white/50 transition-all duration-200",
+        "hover:bg-white hover:text-black hover:border-white",
+        "hidden md:flex items-center justify-center", // Hide on small screens, show on medium screens and above
         orientation === "horizontal"
           ? "left-4 top-1/2 -translate-y-1/2"
           : "top-4 left-1/2 -translate-x-1/2 rotate-90",
@@ -184,7 +185,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft className="h-6 w-6" />
+      <ArrowLeft className="h-4 w-4 text-white" />
     </Button>
 
   );
@@ -202,8 +203,9 @@ const CarouselNext = React.forwardRef<
       ref={ref}
       variant="ghost"
       className={cn(
-        "absolute h-10 w-10 rounded-full bg-transparent text-white border border-white transition-colors duration-200", // Transparent with white border and icon
-        "hover:bg-white hover:text-black", 
+        "absolute h-10 w-10 rounded-full bg-black/20 backdrop-blur-sm text-white border border-white/50 transition-all duration-200",
+        "hover:bg-white hover:text-black hover:border-white",
+        "hidden md:flex items-center justify-center", // Hide on small screens, show on medium screens and above
         orientation === "horizontal"
           ? "right-4 top-1/2 -translate-y-1/2"
           : "bottom-4 left-1/2 -translate-x-1/2 rotate-90",
@@ -213,13 +215,12 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight className="text-white h-6 w-6" />  
+      <ArrowRight className="h-4 w-4 text-white" />
     </Button>
 
   );
 });
 CarouselNext.displayName = "CarouselNext";
-
 
 export {
   type CarouselApi,

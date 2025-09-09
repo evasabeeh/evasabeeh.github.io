@@ -29,7 +29,7 @@ import {
 } from "@/components/ui/carousel";
 import VanillaTilt from "vanilla-tilt";
 import { motion } from "framer-motion";
-import { aboutStats, projects, skills, experiences, education, intro } from "@/data/constants";
+import { aboutStats, projects, skills, experiences, education } from "@/data/constants";
 
 export default function Home() {
   const refScrollContainer = useRef(null);
@@ -272,7 +272,8 @@ export default function Home() {
               
               <div className="order-2 lg:order-1 flex-1">
                 <h2 className="py-12 text-xl font-light leading-normal tracking-tighter text-foreground xl:text-[32px]">
-                  {intro}
+                  Hi! I&apos;m Eva - a Computer Science Engineering graduate from Lucknow, the City of Nawabs.<br></br>
+                  With a strong grasp of C++ and Core Java, I excel in problem-solving and object-oriented programming. Passionate about creating intuitive user experiences, I've honed my skills in Web development and Android development.
                 </h2>
               </div>
             </div>
@@ -335,10 +336,12 @@ export default function Home() {
                 </div>
               </motion.div>
 
+              {/* Horizontal Timeline */}
               <div className="relative">
-
+                {/* Timeline Years - Positioned above the line */}
                 <div className="hidden lg:flex justify-between items-center mb-8 relative">
                   {experiences.map((experience, index) => {
+                    // Extract year from period (e.g., "Aug 2025 - Jan 2025" -> "2025")
                     const year = experience.period.split(' ')[1] || experience.period.split(' ')[0];
                     return (
                       <motion.div
@@ -357,6 +360,7 @@ export default function Home() {
                   })}
                 </div>
 
+                {/* Horizontal Timeline Line */}
                 <div className="hidden lg:block relative mb-16">
                   <div className="w-full h-1 bg-gradient-to-r from-primary via-primary to-primary/50 rounded-full">
                     <motion.div
@@ -368,6 +372,7 @@ export default function Home() {
                     />
                   </div>
                   
+                  {/* Timeline Dots */}
                   {experiences.map((_, index) => (
                     <motion.div
                       key={`dot-${index}`}
@@ -384,6 +389,7 @@ export default function Home() {
                   ))}
                 </div>
 
+                {/* Experience Cards - Positioned below timeline */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
                   {experiences.map((experience, index) => (
                     <motion.div
@@ -402,6 +408,7 @@ export default function Home() {
                       viewport={{ once: true }}
                       className="relative group"
                     >
+                      {/* Connection Line to Timeline Dot - Only visible on large screens */}
                       <motion.div
                         className="hidden lg:block absolute -top-16 left-1/2 transform -translate-x-1/2 w-px h-12 bg-gradient-to-b from-primary/80 to-transparent"
                         initial={{ scaleY: 0, opacity: 0 }}
@@ -411,15 +418,18 @@ export default function Home() {
                         style={{ transformOrigin: 'top' }}
                       />
 
+                      {/* Experience Card */}
                       <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10 p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-primary/30 h-full">
                         
+                        {/* Background Effects */}
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         
                         <div className="absolute -top-2 -right-2 w-16 h-16 bg-primary/10 rounded-full blur-xl group-hover:bg-primary/20 transition-colors duration-500" />
                         <div className="absolute -bottom-2 -left-2 w-12 h-12 bg-secondary/10 rounded-full blur-lg group-hover:bg-secondary/20 transition-colors duration-500" />
 
+                        {/* Content */}
                         <div className="relative z-10">
-
+                          {/* Mobile Year Display */}
                           <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -824,7 +834,7 @@ export default function Home() {
                             {education[index + 1]?.year}
                           </div>
                           <div className="text-md text-muted-foreground mt-1">
-                            Pass out
+                            Passed out
                           </div>
                         </div>
                       </motion.div>
