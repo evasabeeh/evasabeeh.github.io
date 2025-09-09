@@ -88,16 +88,14 @@
   }
   .nav-active {
     color: white !important;
-    font-size: 0.975rem; /* text-sm */
+    font-size: 0.975rem;
     text-transform: lowercase;
-    letter-spacing: -0.015em; /* tracking-tight */
-    /* text-slate-200 is already set above with color */
+    letter-spacing: -0.015em;
   }
   .nav-link {
-    /* Remove the styles from nav-link class */
-    font-size: 0.975rem; /* text-sm */
+    font-size: 0.975rem;
     text-transform: lowercase;
-    letter-spacing: -0.015em; /* tracking-tight */
-    color: rgb(148 163 184); /* text-slate-400 */
+    letter-spacing: -0.015em;
+    color: rgb(148 163 184);
   }
 }

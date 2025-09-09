@@ -1,23 +1,20 @@
-import Container from "@/components/Container";
 import { useEffect, useRef, Suspense, useState } from "react";
-import styles from "@/styles/Home.module.css";
-import { Button } from "@/components/ui/button";
-import {
-  ChevronRight,
-  Linkedin,
-  Github,
-  Code2,
-  Mouse,
-} from "lucide-react";
-import Spline from "@splinetool/react-spline";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Spline from "@splinetool/react-spline";
+import VanillaTilt from "vanilla-tilt";
+import { motion } from "framer-motion";
+import { FaChevronRight, FaGithub, FaCode } from "react-icons/fa";
+import { LuLinkedin, LuMouse } from "react-icons/lu";
+import Container from "@/components/Container";
+import styles from "@/styles/Home.module.css";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from "@/components/ui/card";
 import {
   Carousel,
@@ -27,16 +24,14 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import VanillaTilt from "vanilla-tilt";
-import { motion } from "framer-motion";
-import { aboutStats, projects, skills, experiences, education, intro } from "@/data/constants";
+import { aboutStats, projects, skills, experiences, education, intro } from "@/constants";
 
 export default function Home() {
-  const refScrollContainer = useRef(null);
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const refScrollContainer = useRef<HTMLDivElement>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
-  const [current, setCurrent] = useState<number>(0);
-  const [count, setCount] = useState<number>(0);
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     const sections = document.querySelectorAll("section");
@@ -53,20 +48,16 @@ export default function Home() {
     function handleScroll() {
       let current = "";
       setIsScrolled(window.scrollY > 0);
-
       sections.forEach((section) => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.offsetHeight;
-        const scrollPos = window.scrollY + 300; 
-
+        const scrollPos = window.scrollY + 300;
         if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
           current = section.getAttribute("id") ?? "";
         }
       });
-
       navLinks.forEach((li) => {
         li.classList.remove("nav-active");
-
         if (li.getAttribute("href") === `#${current}`) {
           li.classList.add("nav-active");
         }
@@ -75,7 +66,6 @@ export default function Home() {
 
     void getLocomotive();
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -83,10 +73,8 @@ export default function Home() {
 
   useEffect(() => {
     if (!carouselApi) return;
-
     setCount(carouselApi.scrollSnapList().length);
     setCurrent(carouselApi.selectedScrollSnap() + 1);
-
     carouselApi.on("select", () => {
       setCurrent(carouselApi.selectedScrollSnap() + 1);
     });
@@ -96,7 +84,6 @@ export default function Home() {
     const initializeTilt = () => {
       const tilt: HTMLElement[] = Array.from(document.querySelectorAll("#tilt"));
       const profileTilt: HTMLElement[] = Array.from(document.querySelectorAll("#profile-tilt"));
-
       if (tilt.length > 0) {
         VanillaTilt.init(tilt, {
           speed: 300,
@@ -107,7 +94,6 @@ export default function Home() {
           scale: 0.9,
         });
       }
-
       if (profileTilt.length > 0) {
         VanillaTilt.init(profileTilt, {
           speed: 400,
@@ -116,15 +102,12 @@ export default function Home() {
           gyroscope: true,
           perspective: 1000,
           scale: 1.02,
-          max: 15, 
+          max: 15,
         });
       }
     };
-
     initializeTilt();
-
     const timer = setTimeout(initializeTilt, 1000);
-
     return () => {
       clearTimeout(timer);
     };
@@ -135,7 +118,7 @@ export default function Home() {
       <div ref={refScrollContainer}>
         <Gradient />
 
-        {/* Intro */}
+        {/* Home */}
         <section
           id="home"
           data-scroll-section
@@ -183,7 +166,7 @@ export default function Home() {
             >
               <Link href="https://drive.google.com/file/d/1bl4uwfV8MdEZQ8FeSAEiLNzOOcW1i6xC/view?usp=drive_link" passHref>
                 <Button>
-                  Resume <ChevronRight className="ml-1 h-4 w-4" />
+                  Resume <FaChevronRight className="ml-2 h-2 w-2" />
                 </Button>
               </Link>
               <Link href="mailto:evasabeeh@gmail.com">
@@ -194,16 +177,14 @@ export default function Home() {
                 </Button>
               </Link>
             </span>
-
             <div
               className={cn(
                 styles.scroll,
                 isScrolled && styles["scroll--hidden"],
               )}
             >
-              <Mouse className="!text-white relative z-10 mt-1 animate-bounce" size={50} />
+              <LuMouse className="!text-white relative z-10 mt-1 animate-bounce" size={50} />
             </div>
-
           </div>
           <div
             data-scroll
@@ -217,27 +198,26 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="mt-20">
+        {/* Social */}
+        <section id="social" className="mt-20">
           <div className="flex justify-center gap-6">
             <Link href="https://linkedin.com/in/eva-sabeeh/">
               <Button variant="outline" className="bg-transparent text-white size-20">
-                <Linkedin />
+                <LuLinkedin />
               </Button>
             </Link>
             <Link href="https://github.com/evasabeeh/">
               <Button variant="outline" className="bg-transparent text-white size-20">
-                <Github />
+                <FaGithub />
               </Button>
             </Link>
             <Link href="https://linktr.ee/evasabeeh">
               <Button variant="outline" className="bg-transparent text-white size-20">
-                <Code2 />
+                <FaCode />
               </Button>
             </Link>
           </div>
         </section>
-
-
 
         {/* About */}
         <section id="about" data-scroll-section>
@@ -277,7 +257,6 @@ export default function Home() {
               </div>
             </div>
             
-
             {/* Stats Section */}
             <div className="pt-20 grid grid-cols-2 gap-8 xl:grid-cols-2 justify-items-center">
               {aboutStats.map((stat) => (
@@ -296,8 +275,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-
 
         {/* Experience */}
         <section id="experience" data-scroll-section>
@@ -337,9 +314,9 @@ export default function Home() {
 
               <div className="relative">
 
-                <div className="hidden lg:flex justify-between items-center mb-8 relative">
+                <div className="hidden md:flex justify-between items-center mb-2 relative">
                   {experiences.map((experience, index) => {
-                    const year = experience.period.split(' ')[1] || experience.period.split(' ')[0];
+                    const year = experience.period.split(' ')[1] ?? experience.period.split(' ')[0];
                     return (
                       <motion.div
                         key={`year-${index}`}
@@ -349,7 +326,7 @@ export default function Home() {
                         viewport={{ once: true }}
                         className="flex flex-col items-center"
                       >
-                        <div className="text-6xl lg:text-7xl xl:text-8xl font-bold text-primary/20 clash-grotesk mb-4">
+                        <div className="text-5xl lg:text-6xl xl:text-7xl font-bold text-primary/20 clash-grotesk">
                           {year}
                         </div>
                       </motion.div>
@@ -357,7 +334,7 @@ export default function Home() {
                   })}
                 </div>
 
-                <div className="hidden lg:block relative mb-16">
+                <div className="hidden md:block relative mb-16">
                   <div className="w-full h-1 bg-gradient-to-r from-primary via-primary to-primary/50 rounded-full">
                     <motion.div
                       initial={{ scaleX: 0 }}
@@ -367,24 +344,9 @@ export default function Home() {
                       className="w-full h-full bg-gradient-to-r from-primary to-primary rounded-full origin-left"
                     />
                   </div>
-                  
-                  {experiences.map((_, index) => (
-                    <motion.div
-                      key={`dot-${index}`}
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      transition={{ duration: 0.6, delay: index * 0.3 + 0.5 }}
-                      viewport={{ once: true }}
-                      className="absolute top-1/2 transform -translate-y-1/2 w-6 h-6 bg-primary rounded-full border-4 border-background shadow-lg z-10"
-                      style={{
-                        left: `${(index / (experiences.length - 1)) * 100}%`,
-                        transform: 'translate(-50%, -50%)'
-                      }}
-                    />
-                  ))}
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-12">
                   {experiences.map((experience, index) => (
                     <motion.div
                       key={experience.title}
@@ -403,7 +365,7 @@ export default function Home() {
                       className="relative group"
                     >
                       <motion.div
-                        className="hidden lg:block absolute -top-16 left-1/2 transform -translate-x-1/2 w-px h-12 bg-gradient-to-b from-primary/80 to-transparent"
+                        className="hidden md:block absolute -top-16 left-1/2 transform -translate-x-1/2 w-px h-12 bg-gradient-to-b from-primary/80 to-transparent"
                         initial={{ scaleY: 0, opacity: 0 }}
                         whileInView={{ scaleY: 1, opacity: 1 }}
                         transition={{ duration: 0.8, delay: index * 0.2 + 1 }}
@@ -412,9 +374,8 @@ export default function Home() {
                       />
 
                       <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10 p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-primary/30 h-full">
-                        
+              
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        
                         <div className="absolute -top-2 -right-2 w-16 h-16 bg-primary/10 rounded-full blur-xl group-hover:bg-primary/20 transition-colors duration-500" />
                         <div className="absolute -bottom-2 -left-2 w-12 h-12 bg-secondary/10 rounded-full blur-lg group-hover:bg-secondary/20 transition-colors duration-500" />
 
@@ -428,7 +389,7 @@ export default function Home() {
                             className="block lg:hidden mb-4"
                           >
                             <div className="text-4xl font-bold text-primary/30 clash-grotesk">
-                              {experience.period.split(' ')[1] || experience.period.split(' ')[0]}
+                              {experience.period.split(' ')[1] ?? experience.period.split(' ')[0]}
                             </div>
                           </motion.div>
 
@@ -504,8 +465,6 @@ export default function Home() {
           </div>
         </section>
 
-
-
         {/* Skills */}
         <section id="skills" data-scroll-section>
           <div
@@ -514,7 +473,6 @@ export default function Home() {
             data-scroll-position="top"
             className="flex flex-col justify-start space-y-10"
           >
-
             <div className="flex flex-col py-6 xl:p-1">
               <h2 className="text-4xl font-medium tracking-tight">
                 Skill & Platforms <span className="text-gradient clash-grotesk tracking-normal"> Section</span>
@@ -570,8 +528,6 @@ export default function Home() {
             </motion.div>
           </div>
         </section>
-
-
 
         {/* Projects */}
         <section id="projects" data-scroll-section>
@@ -650,8 +606,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-
 
         {/* Education */}
         <section id="education" data-scroll-section>
@@ -835,8 +789,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-
 
         {/* Contact */}
         <section id="contact" data-scroll-section className="my-16">

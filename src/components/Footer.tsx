@@ -1,23 +1,23 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-import { MailIcon } from "lucide-react";
+import { LuMail } from "react-icons/lu";
+
+function getLocalTime() {
+  const date = new Date();
+  return date.toLocaleTimeString("en-US", {
+    hour12: true,
+    hour: "numeric",
+    minute: "numeric",
+  });
+}
 
 export default function Footer() {
-  // get the current time in UTC+1 time zone
-  const [time, setTime] = useState<string>("");
+  const [time, setTime] = useState(getLocalTime());
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const date = new Date();
-      date.setHours(date.getHours());
-      setTime(
-        date.toLocaleTimeString("en-US", {
-          hour12: true,
-          hour: "numeric",
-          minute: "numeric",
-        }),
-      );
+      setTime(getLocalTime());
     }, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -48,8 +48,8 @@ export default function Footer() {
           passHref
           className="text-xs text-muted-foreground hover:text-foreground"
         >
-          <Button variant={"outline"}>
-            <MailIcon className="h-4 w-4 md:mr-2" />
+          <Button variant="outline">
+            <LuMail className="h-4 w-4 md:mr-2" />
             <span className="hidden md:flex">evasabeeh@gmail.com</span>
           </Button>
         </Link>

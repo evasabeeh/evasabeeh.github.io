@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import styles from "@/styles/Container.module.css";
 
-/* Framer motion variants */
 const opacity = {
   initial: {
     opacity: 0,
@@ -39,30 +38,37 @@ export default function Preloader() {
   const [index, setIndex] = useState(0);
   const [dimension, setDimension] = useState({ width: 0, height: 0 });
 
-  useEffect(() => {
+  const updateDimension = useCallback(() => {
     setDimension({ width: window.innerWidth, height: window.innerHeight });
   }, []);
 
   useEffect(() => {
-    if (index == words.length - 1) return;
-    setTimeout(
-      () => {
-        setIndex(index + 1);
-      },
-      index == 0 ? 1000 : 150,
-    );
+    updateDimension();
+    window.addEventListener("resize", updateDimension);
+    return () => window.removeEventListener("resize", updateDimension);
+  }, [updateDimension]);
+
+  useEffect(() => {
+    if (index === words.length - 1) return;
+    const timer = setTimeout(() => setIndex(index + 1), index === 0 ? 1000 : 150);
+    return () => clearTimeout(timer);
   }, [index]);
 
-  const initialPath = `M0 0 L${dimension.width} 0 L${dimension.width} ${dimension.height} Q${dimension.width / 2} ${dimension.height + 300} 0 ${dimension.height}  L0 0`;
-  const targetPath = `M0 0 L${dimension.width} 0 L${dimension.width} ${dimension.height} Q${dimension.width / 2} ${dimension.height} 0 ${dimension.height}  L0 0`;
+  const getPath = useCallback(
+    (extra = 0) =>
+      `M0 0 L${dimension.width} 0 L${dimension.width} ${dimension.height} Q${
+        dimension.width / 2
+      } ${dimension.height + extra} 0 ${dimension.height}  L0 0`,
+    [dimension]
+  );
 
   const curve = {
     initial: {
-      d: initialPath,
+      d: getPath(300),
       transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] },
     },
     exit: {
-      d: targetPath,
+      d: getPath(0),
       transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.3 },
     },
   };
@@ -85,7 +91,7 @@ export default function Preloader() {
               variants={curve}
               initial="initial"
               exit="exit"
-            ></motion.path>
+            />
           </svg>
         </>
       )}

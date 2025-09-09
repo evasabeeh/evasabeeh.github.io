@@ -29,7 +29,7 @@
 - Animation: tailwindcss-animate
 - Smooth scroll behaviour: Locomotive-scroll
 - Interactive UI/UX: Next.js
-- Icons used from Lucide-React
+- Icons used from react-icons
 
 
 ## Add ons
