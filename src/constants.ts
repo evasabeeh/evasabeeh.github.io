@@ -14,10 +14,22 @@ export const projects = [
         href: "https://github.com/evasabeeh/TravelRoutePlanner",
     },
     {
+        title: "PCB & Electronics Shop",
+        description: "An e-commerce platform for PCB and electronic components",
+        image: "/projects/pcb.png",
+        href: "https://www.prathmeshengineering.com/",
+    },
+    {
         title: "Food Ordering system",
         description: "Full-stack real-time MERN app",
         image: "/projects/food.png",
         href: "https://fooddelivery-frontend-szy1.onrender.com/",
+    },
+    {
+        title: "Nextute - EdTech Platform",
+        description: "An EdTech platform for learning and upskilling",
+        image: "/projects/nextute.png",
+        href: "https://www.nextute.com/",
     },
     {
         title: "Social Media Website",
@@ -164,7 +176,7 @@ export const experiences = [
     {
         title: "Software Developer Intern",
         company: "Livindeed",
-        period: "Aug 2025 - Jan 2025",
+        period: "Aug 2025 - Oct 2025",
         technologies: ["React Native", "TypeScript", "Firebase", "npm", "PostgreSQL"]
     },
     {
