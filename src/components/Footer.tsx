@@ -13,9 +13,11 @@ function getLocalTime() {
 }
 
 export default function Footer() {
-  const [time, setTime] = useState(getLocalTime());
+  const [time, setTime] = useState("");
 
   useEffect(() => {
+    setTime(getLocalTime());
+    
     const interval = setInterval(() => {
       setTime(getLocalTime());
     }, 1000);

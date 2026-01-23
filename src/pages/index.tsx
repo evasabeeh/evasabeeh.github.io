@@ -314,9 +314,11 @@ export default function Home() {
 
               <div className="relative">
 
+                <div className="md:hidden absolute left-1/2 top-[-5rem] bottom-0 w-px bg-gradient-to-b from-primary to-primary/30 transform -translate-x-1/2 pointer-events-none" />
+
                 <div className="hidden md:flex justify-between items-center mb-2 relative">
                   {experiences.map((experience, index) => {
-                    const year = experience.period.split(' ')[1] ?? experience.period.split(' ')[0];
+                    const month = experience.period.split(' ')[0];
                     return (
                       <motion.div
                         key={`year-${index}`}
@@ -326,8 +328,8 @@ export default function Home() {
                         viewport={{ once: true }}
                         className="flex flex-col items-center"
                       >
-                        <div className="text-5xl lg:text-6xl xl:text-7xl font-bold text-primary/20 clash-grotesk">
-                          {year}
+                        <div className="px-28 text-5xl lg:text-6xl xl:text-7xl font-bold text-gradient clash-grotesk">
+                          {month}
                         </div>
                       </motion.div>
                     );
@@ -365,7 +367,7 @@ export default function Home() {
                       className="relative group"
                     >
                       <motion.div
-                        className="hidden md:block absolute -top-16 left-1/2 transform -translate-x-1/2 w-px h-12 bg-gradient-to-b from-primary/80 to-transparent"
+                        className="hidden md:block absolute -top-16 left-1/2 transform -translate-x-1/2 w-px h-12 bg-gradient-to-b from-primary/80 to-primary/10"
                         initial={{ scaleY: 0, opacity: 0 }}
                         whileInView={{ scaleY: 1, opacity: 1 }}
                         transition={{ duration: 0.8, delay: index * 0.2 + 1 }}
@@ -373,25 +375,13 @@ export default function Home() {
                         style={{ transformOrigin: 'top' }}
                       />
 
-                      <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10 p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-primary/30 h-full">
+                      <div className="group relative z-10 overflow-hidden rounded-xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10 p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-primary/30 h-full">
               
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <div className="absolute -top-2 -right-2 w-16 h-16 bg-primary/10 rounded-full blur-xl group-hover:bg-primary/20 transition-colors duration-500" />
                         <div className="absolute -bottom-2 -left-2 w-12 h-12 bg-secondary/10 rounded-full blur-lg group-hover:bg-secondary/20 transition-colors duration-500" />
 
                         <div className="relative z-10">
-
-                          <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: index * 0.2 + 0.2 }}
-                            viewport={{ once: true }}
-                            className="block lg:hidden mb-4"
-                          >
-                            <div className="text-4xl font-bold text-primary/30 clash-grotesk">
-                              {experience.period.split(' ')[1] ?? experience.period.split(' ')[0]}
-                            </div>
-                          </motion.div>
 
                           <motion.h4
                             initial={{ opacity: 0, y: 20 }}

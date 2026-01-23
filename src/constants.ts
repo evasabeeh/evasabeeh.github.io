@@ -3,7 +3,7 @@ export const aboutStats = [
     { label: "Technologies mastered", value: "5+" },
 ];
 
-export const intro = `Hi! I&apos;m Eva - a Computer Science Engineering graduate from Lucknow, the City of Nawabs.
+export const intro = `Hi! I'm Eva - a Computer Science Engineering graduate from Lucknow, the City of Nawabs.
                   With a strong grasp of C++ and Core Java, I excel in problem-solving and object-oriented programming. I've honed my skills in Web development and Mobile App development.`;
 
 export const projects = [
@@ -79,6 +79,10 @@ export const skills = [
         image: "/skills/js.png",
     },
     {
+        skill: "TypeScript",
+        image: "/skills/typescript.png",
+    },
+    {
         skill: "React Native",
         image: "/skills/react-native.png",
     },
@@ -105,6 +109,10 @@ export const skills = [
     {
         skill: "Postgre SQL",
         image: "/skills/postgresql.png",
+    },
+    {
+        skill: "Strapi",
+        image: "/skills/strapi.png",
     },
     {
         skill: "MySQL",
@@ -174,16 +182,16 @@ export const skills = [
 
 export const experiences = [
     {
-        title: "Software Developer Intern",
-        company: "Livindeed",
-        period: "Aug 2025 - Oct 2025",
-        technologies: ["React Native", "TypeScript", "Firebase", "npm", "PostgreSQL"]
+        title: "Frontend Developer",
+        company: "TenTwenty",
+        period: "Nov 2025 - Present",
+        technologies: ["Next.js", "Strapi", "React.js", "Tailwind CSS", "TypeScript", "Git", "RESTful APIs"]
     },
     {
-        title: "Full Stack Developer Intern",
-        company: "DevX Alpha",
-        period: "Jul 2025 - Oct 2025",
-        technologies: ["Next.js", "React.js", "Tailwind CSS", "TypeScript", "npm/bun", "MongoDB", "Express.js", "Node.js", "RESTful APIs"]
+        title: "Software Developer Intern",
+        company: "Livindeed",
+        period: "Aug 2025 - Nov 2025",
+        technologies: ["React Native", "TypeScript", "Firebase", "npm", "PostgreSQL", "Node.js"]
     },
     {
         title: "Web Development Intern",
