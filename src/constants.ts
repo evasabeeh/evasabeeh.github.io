@@ -1,10 +1,53 @@
+export const pills = ["Web Development", "Problem Solving", "Android Development"];
+
+export const heroDescription = "A passionate tech enthusiast and keen learner, driven by curiosity and innovation, aim to create impactful solutions in the tech world.";
+
+export const socialLinks = [
+    {
+        name: "LinkedIn",
+        href: "https://linkedin.com/in/eva-sabeeh/",
+        icon: "LuLinkedin",
+    },
+    {
+        name: "GitHub",
+        href: "https://github.com/evasabeeh/",
+        icon: "FaGithub",
+    },
+    {
+        name: "Linktree",
+        href: "https://linktr.ee/evasabeeh",
+        icon: "FaCode",
+    },
+];
+
+export const intro = `Hi! I'm Eva - a seasoned problem-solver and when it does, it's a minor miracle. 
+Beyond coding, I'm skilled to turn complex ideas into seamless and user-focused digital experiences.`;
+
 export const aboutStats = [
     { label: "Programming Languages known", value: "4+" },
     { label: "Technologies mastered", value: "5+" },
 ];
 
-export const intro = `Hi! I'm Eva - a seasoned problem-solver and when it does, it's a minor miracle. 
-Beyond coding, I'm skilled to turn complex ideas into seamless and user-focused digital experiences.`;
+export const experiences = [
+    {
+        title: "Frontend Developer",
+        company: "TenTwenty",
+        period: "Nov 2025 - Present",
+        technologies: ["Next.js", "Strapi", "React.js", "Tailwind CSS", "TypeScript", "Git", "RESTful APIs"]
+    },
+    {
+        title: "Software Developer Intern",
+        company: "Livindeed",
+        period: "Aug 2025 - Nov 2025",
+        technologies: ["React Native", "TypeScript", "Firebase", "npm", "PostgreSQL", "Node.js"]
+    },
+    {
+        title: "Web Development Intern",
+        company: "FruitRush",
+        period: "Mar 2025 - Jun 2025",
+        technologies: ["React.js", "Tailwind CSS", "Canva", "npm"]
+    }
+];
 
 export const projects = [
     {
@@ -178,27 +221,6 @@ export const skills = [
         skill: "npm",
         image: "/skills/npm.svg",
     },
-];
-
-export const experiences = [
-    {
-        title: "Frontend Developer",
-        company: "TenTwenty",
-        period: "Nov 2025 - Present",
-        technologies: ["Next.js", "Strapi", "React.js", "Tailwind CSS", "TypeScript", "Git", "RESTful APIs"]
-    },
-    {
-        title: "Software Developer Intern",
-        company: "Livindeed",
-        period: "Aug 2025 - Nov 2025",
-        technologies: ["React Native", "TypeScript", "Firebase", "npm", "PostgreSQL", "Node.js"]
-    },
-    {
-        title: "Web Development Intern",
-        company: "FruitRush",
-        period: "Mar 2025 - Jun 2025",
-        technologies: ["React.js", "Tailwind CSS", "Canva", "npm"]
-    }
 ];
 
 export const education = [

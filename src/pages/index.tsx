@@ -24,7 +24,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import { aboutStats, projects, skills, experiences, education, intro } from "@/constants";
+import { aboutStats, projects, skills, experiences, education, intro, heroDescription, socialLinks, pills } from "@/constants";
 
 const Spline = dynamic(() => import("@splinetool/react-spline"), {
   ssr: false,
@@ -144,9 +144,9 @@ export default function Home() {
               data-scroll-speed=".09"
               className="flex flex-row items-center space-x-1.5"
             >
-              <span className={styles.pill}>Web Development</span>
-              <span className={styles.pill}>Problem Solving</span>
-              <span className={styles.pill}>Android Development</span>
+              {pills.map((pill) => (
+                <span key={pill} className={styles.pill}>{pill}</span>
+              ))}
             </div>
             <div>
               <h1
@@ -168,7 +168,7 @@ export default function Home() {
                 data-scroll-speed=".06"
                 className="mt-1 max-w-lg tracking-tight text-muted-foreground 2xl:text-xl"
               >
-                A passionate tech enthusiast and keen learner, driven by curiosity and innovation, aim to create impactful solutions in the tech world.
+                {heroDescription}
               </p>
             </div>
             <span
@@ -218,21 +218,16 @@ export default function Home() {
         {/* Social */}
         <section id="social" className="mt-20">
           <div className="flex justify-center gap-6">
-            <Link href="https://linkedin.com/in/eva-sabeeh/">
-              <Button variant="outline" className="bg-transparent text-white size-20 md:size-24">
-                <LuLinkedin size={24} />
-              </Button>
-            </Link>
-            <Link href="https://github.com/evasabeeh/">
-              <Button variant="outline" className="bg-transparent text-white size-20 md:size-24">
-                <FaGithub size={24} />
-              </Button>
-            </Link>
-            <Link href="https://linktr.ee/evasabeeh">
-              <Button variant="outline" className="bg-transparent text-white size-20 md:size-24">
-                <FaCode size={24} />
-              </Button>
-            </Link>
+            {socialLinks.map((social) => {
+              const Icon = social.icon === "LuLinkedin" ? LuLinkedin : social.icon === "FaGithub" ? FaGithub : FaCode;
+              return (
+                <Link key={social.name} href={social.href}>
+                  <Button variant="outline" className="bg-transparent text-white size-20 md:size-24">
+                    <Icon size={24} />
+                  </Button>
+                </Link>
+              );
+            })}
           </div>
         </section>
 
