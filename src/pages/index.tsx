@@ -1,7 +1,7 @@
-import { useEffect, useRef, Suspense, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Spline from "@splinetool/react-spline";
+import dynamic from "next/dynamic";
 import VanillaTilt from "vanilla-tilt";
 import { motion } from "framer-motion";
 import { FaChevronRight, FaGithub, FaCode } from "react-icons/fa";
@@ -26,12 +26,18 @@ import {
 } from "@/components/ui/carousel";
 import { aboutStats, projects, skills, experiences, education, intro } from "@/constants";
 
+const Spline = dynamic(() => import("@splinetool/react-spline"), {
+  ssr: false,
+  loading: () => <span>Loading...</span>,
+});
+
 export default function Home() {
   const refScrollContainer = useRef<HTMLDivElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+  const [canRenderSpline, setCanRenderSpline] = useState(false);
 
   useEffect(() => {
     const sections = document.querySelectorAll("section");
@@ -113,6 +119,13 @@ export default function Home() {
     };
   }, [carouselApi]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const canvas = document.createElement("canvas");
+    const gl = (canvas.getContext("webgl") || canvas.getContext("experimental-webgl")) as WebGLRenderingContext | null;
+    if (gl && typeof gl.getParameter === "function") setCanRenderSpline(true);
+  }, []);
+
   return (
     <Container>
       <div ref={refScrollContainer}>
@@ -122,7 +135,7 @@ export default function Home() {
         <section
           id="home"
           data-scroll-section
-          className="mt-40 md-20 flex w-full flex-col items-center xl:mt-0 xl:min-h-screen xl:flex-row xl:justify-between"
+          className="mt-32 flex w-full flex-col items-center xl:mt-0 xl:min-h-screen xl:flex-row xl:justify-between"
         >
           <div className={styles.intro}>
             <div
@@ -192,9 +205,13 @@ export default function Home() {
             id={styles["canvas-container"]}
             className="mt-14 h-full w-full xl:mt-0"
           >
-            <Suspense fallback={<span>Loading...</span>}>
+            {canRenderSpline ? (
               <Spline scene="/assets/scene.splinecode" />
-            </Suspense>
+            ) : (
+              <div className="flex h-full w-full items-center justify-center rounded-3xl border border-muted/40 bg-gradient-to-br from-background to-muted/10 p-8 text-center text-sm text-muted-foreground">
+                3D preview unavailable on this device. Please enable WebGL or try a different browser.
+              </div>
+            )}
           </div>
         </section>
 
@@ -202,18 +219,18 @@ export default function Home() {
         <section id="social" className="mt-20">
           <div className="flex justify-center gap-6">
             <Link href="https://linkedin.com/in/eva-sabeeh/">
-              <Button variant="outline" className="bg-transparent text-white size-20">
-                <LuLinkedin />
+              <Button variant="outline" className="bg-transparent text-white size-20 md:size-24">
+                <LuLinkedin size={24} />
               </Button>
             </Link>
             <Link href="https://github.com/evasabeeh/">
-              <Button variant="outline" className="bg-transparent text-white size-20">
-                <FaGithub />
+              <Button variant="outline" className="bg-transparent text-white size-20 md:size-24">
+                <FaGithub size={24} />
               </Button>
             </Link>
             <Link href="https://linktr.ee/evasabeeh">
-              <Button variant="outline" className="bg-transparent text-white size-20">
-                <FaCode />
+              <Button variant="outline" className="bg-transparent text-white size-20 md:size-24">
+                <FaCode size={24} />
               </Button>
             </Link>
           </div>
@@ -293,7 +310,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="relative max-w-7xl mx-auto px-4 py-20">
+            <div className="relative max-w-7xl mx-auto px-4">
 
               <motion.div
                 initial={{ opacity: 0, y: -30 }}
@@ -598,7 +615,7 @@ export default function Home() {
         </section>
 
         {/* Education */}
-        <section id="education" data-scroll-section>
+        <section id="education" data-scroll-section className="overflow-hidden">
           <div
             data-scroll
             data-scroll-speed=".4"
@@ -614,7 +631,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="relative max-w-full mx-auto">
+            <div className="relative max-w-full mx-auto overflow-hidden">
 
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}
@@ -783,9 +800,6 @@ export default function Home() {
         {/* Contact */}
         <section id="contact" data-scroll-section className="my-16">
           <motion.div
-            data-scroll
-            data-scroll-speed=".4"
-            data-scroll-position="top"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -841,7 +855,7 @@ export default function Home() {
 function Gradient() {
   return (
     <>
-      <div className="absolute -top-40 right-0 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
+      <div className="absolute -top-40 sm:-top-80 right-0 -z-10 transform-gpu overflow-hidden blur-3xl">
         <svg
           className="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
           viewBox="0 0 1155 678"

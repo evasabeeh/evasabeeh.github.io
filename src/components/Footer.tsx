@@ -26,7 +26,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-gradient-to-t from-primary/[1%] to-transparent">
-      <div className="container mx-auto flex flex-row items-center justify-between py-6">
+      <div className="container mx-auto flex flex-row items-center justify-between pb-6">
         <span className="flex flex-row items-center space-x-4">
           <p className="text-xs text-muted-foreground">
             Thank you for being here.{" "}

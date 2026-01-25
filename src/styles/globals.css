@@ -46,11 +46,13 @@
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     cursor: wait;
+    overflow-x: hidden;
   }
   section {
     scroll-margin-top: 60px;

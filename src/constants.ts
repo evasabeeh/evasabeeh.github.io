@@ -3,8 +3,8 @@ export const aboutStats = [
     { label: "Technologies mastered", value: "5+" },
 ];
 
-export const intro = `Hi! I'm Eva - a Computer Science Engineering graduate from Lucknow, the City of Nawabs.
-                  With a strong grasp of C++ and Core Java, I excel in problem-solving and object-oriented programming. I've honed my skills in Web development and Mobile App development.`;
+export const intro = `Hi! I'm Eva - a seasoned problem-solver and when it does, it's a minor miracle. 
+Beyond coding, I'm skilled to turn complex ideas into seamless and user-focused digital experiences.`;
 
 export const projects = [
     {
