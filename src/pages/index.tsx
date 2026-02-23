@@ -237,7 +237,7 @@ export default function Home() {
             data-scroll
             data-scroll-speed=".4"
             data-scroll-position="top"
-            className="my-14 flex max-w-6xl flex-col justify-start space-y-10"
+            className="mt-14 flex max-w-6xl flex-col justify-start"
           >
             <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
 
@@ -270,7 +270,8 @@ export default function Home() {
             </div>
             
             {/* Stats Section */}
-            <div className="pt-20 grid grid-cols-2 gap-8 xl:grid-cols-2 justify-items-center">
+            <div
+              className="md:pt-20 grid grid-cols-2 gap-8 xl:grid-cols-2 justify-items-center">
               {aboutStats.map((stat) => (
                 <div
                   key={stat.label}
@@ -292,11 +293,12 @@ export default function Home() {
         <section id="experience" data-scroll-section>
           <div
             data-scroll
-            data-scroll-speed=".4"
+            data-scroll-speed=".6"
             data-scroll-position="top"
+            data-scroll-enable-touch-speed
             className="flex flex-col justify-start space-y-10"
           >
-            <div className="flex flex-col py-6 xl:p-1">
+            <div className="flex flex-col pb-6 xl:p-1">
               <h2 className="text-4xl font-medium tracking-tight">
                 Work <span className="text-gradient clash-grotesk tracking-normal">Experience</span>
               </h2>
@@ -473,9 +475,10 @@ export default function Home() {
             data-scroll
             data-scroll-speed=".4"
             data-scroll-position="top"
+            data-scroll-enable-touch-speed
             className="flex flex-col justify-start space-y-10"
           >
-            <div className="flex flex-col py-6 xl:p-1">
+            <div className="flex flex-col py-16 xl:p-1">
               <h2 className="text-4xl font-medium tracking-tight">
                 Skill & Platforms <span className="text-gradient clash-grotesk tracking-normal"> Section</span>
               </h2>
@@ -534,7 +537,11 @@ export default function Home() {
         {/* Projects */}
         <section id="projects" data-scroll-section>
 
-          <div className="relative isolate -z-10">
+          <div 
+            data-scroll
+            data-scroll-speed=".8"
+            data-scroll-position="top" 
+            className="relative isolate -z-10">
             <div
               className="absolute inset-x-0 -top-40 transform-gpu overflow-hidden blur-[100px] sm:-top-80 lg:-top-60"
               aria-hidden="true"
@@ -548,7 +555,11 @@ export default function Home() {
               />
             </div>
           </div>
-          <div data-scroll data-scroll-speed=".4" className="my-16">
+          <div
+            data-scroll
+            data-scroll-enable-touch-speed
+            data-scroll-speed=".06"
+            className="mb-16">
             <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
               ✨ I got you here.
             </span>
@@ -614,10 +625,10 @@ export default function Home() {
           <div
             data-scroll
             data-scroll-speed=".4"
-            data-scroll-position="top"
             className="flex flex-col justify-start space-y-10"
           >
-            <div className="flex flex-col py-6 xl:p-1">
+            <div 
+              className="flex flex-col pt-6 xl:p-1">
               <h2 className="text-4xl font-medium tracking-tight">
                 Education <span className="text-gradient clash-grotesk tracking-normal">Background</span>
               </h2>
@@ -807,7 +818,11 @@ export default function Home() {
             <div className="absolute -bottom-2 -left-2 w-24 h-24 bg-secondary/10 rounded-full blur-lg group-hover:bg-secondary/20 transition-colors duration-500" />
             <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-primary/5 rounded-full blur-md group-hover:bg-primary/15 transition-colors duration-700" />
 
-            <div className="relative z-10 flex flex-col items-center justify-center text-center">
+            <div 
+              data-scroll
+              data-scroll-speed=".2"
+              data-scroll-enable-touch-speed
+            className="relative z-10 flex flex-col items-center justify-center text-center">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
