@@ -1,24 +1,20 @@
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import dynamic from "next/dynamic";
+import VanillaTilt from "vanilla-tilt";
+import { motion } from "framer-motion";
+import { FaChevronRight, FaGithub, FaCode } from "react-icons/fa";
+import { LuLinkedin, LuMouse } from "react-icons/lu";
 import Container from "@/components/Container";
-import { useEffect, useRef, Suspense, useState } from "react";
 import styles from "@/styles/Home.module.css";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
-  ChevronRight,
-  GraduationCap,
-  Linkedin,
-  Github,
-  Code2,
-  Mouse,
-} from "lucide-react";
-import Spline from "@splinetool/react-spline";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { 
   Card,
-  CardContent, 
-  CardHeader, 
-  CardTitle 
+  CardContent,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
 import {
   Carousel,
@@ -28,161 +24,21 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import VanillaTilt from "vanilla-tilt";
-import { motion } from "framer-motion";
+import { aboutStats, projects, skills, experiences, education, intro, heroDescription, socialLinks, pills } from "@/constants";
 
-const aboutStats = [
-  { label: "Programming Languages known", value: "4+" },
-  { label: "Technologies mastered", value: "5+" },
-];
-
-
-const projects = [
-  {
-    title: "Social Media Website",
-    description: "Focused on frontend for a social media site",
-    image: "/assets/socialmedia.png",
-    href: "https://evasabeeh-socialmediawebsite.vercel.app/",
-  },
-  {
-    title: "Amazon Frontend Clone",
-    description: "Replicates Amazon's user-friendly interface",
-    image: "/assets/amazon.png",
-    href: "https://evasabeeh-amazonclone.vercel.app/",
-  },
-  {
-    title: "Optimized Travel Route Planner",
-    description: "Utilizes data structure to calculate the optimal route",
-    image: "/assets/travelroute.png",
-    href: "https://github.com/evasabeeh/TravelRoutePlanner",
-  },
-  {
-    title: "Melofy - Spotify inspired app",
-    description: "An Android music playback application inspired by Spotify",
-    image: "/assets/melofy.png",
-    href: "https://github.com/evasabeeh/Melofy/releases/tag/android-app",
-  },
-  {
-    title: "Bookmania - Digitized Bookstore",
-    description: "Responsive and mobile-first layout",
-    image: "/assets/bookmania.png",
-    href: "https://evasabeeh-bookmania.vercel.app/",
-  },
-  {
-    title: "Food Ordering system",
-    description: "Full-stack real-time MERN app",
-    image: "/assets/food.png",
-    href: "https://fooddelivery-frontend-szy1.onrender.com/",
-  },
-];
-
-const skills = [
-  {
-    skill: "C++",
-    image: "/skills/cpp.png",
-  },
-  {
-    skill: "Core Java",
-    image: "/skills/java.png",
-  },
-  {
-    skill: "HTML",
-    image: "/skills/html.png",
-  },
-  {
-    skill: "CSS",
-    image: "/skills/css.png",
-  },
-  {
-    skill: "JavaScript",
-    image: "/skills/js.png",
-  },
-  {
-    skill: "React JS",
-    image: "/skills/react.png",
-  },
-  {
-    skill: "Tailwind CSS",
-    image: "/skills/tailwind.png",
-  },
-  {
-    skill: "Bootstrap",
-    image: "/skills/bootstrap.png",
-  },
-  {
-    skill: "Sass",
-    image: "/skills/sass.png",
-  },
-  {
-    skill: "Jetpack Compose",
-    image: "/skills/jetpack.png",
-  },
-  {
-    skill: "Git",
-    image: "/skills/git.png",
-  },
-  {
-    skill: "GitHub",
-    image: "/skills/github.png",
-  },
-  {
-    skill: "MySQL",
-    image: "/skills/mysql.png",
-  },
-  {
-    skill: "VS Code",
-    image: "/skills/vs.png",
-  },
-  {
-    skill: "Figma",
-    image: "/skills/figma.png",
-  },
-  {
-    skill: "Android Studio",
-    image: "/skills/android.png",
-  },
-  {
-    skill: "MongoDB",
-    image: "/skills/mongo.png",
-  },
-  {
-    skill: "Postman",
-    image: "/skills/postman.png",
-  },
-];
-
-const services = [
-  {
-    service: "CISCE, Matriculation",
-    year: "2019",
-    description:
-      "Spring Dale College, Lucknow",
-    icon: GraduationCap,
-  },
-  {
-    service: "CISCE, Intermediate, Mathematics",
-    year: "2021",
-    description:
-      "Spring Dale College, Lucknow",
-    icon: GraduationCap,
-  },
-  {
-    service: "Bachelor of Engineering, Computer Science",
-    year: "2025",
-    description:
-      "Chandigarh University, Mohali",
-    icon: GraduationCap,
-  },
-];
+const Spline = dynamic(() => import("@splinetool/react-spline"), {
+  ssr: false,
+  loading: () => <span>Loading...</span>,
+});
 
 export default function Home() {
-  const refScrollContainer = useRef(null);
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const refScrollContainer = useRef<HTMLDivElement>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
-  const [current, setCurrent] = useState<number>(0);
-  const [count, setCount] = useState<number>(0);
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+  const [canRenderSpline, setCanRenderSpline] = useState(false);
 
-  // handle scroll
   useEffect(() => {
     const sections = document.querySelectorAll("section");
     const navLinks = document.querySelectorAll(".nav-link");
@@ -198,27 +54,24 @@ export default function Home() {
     function handleScroll() {
       let current = "";
       setIsScrolled(window.scrollY > 0);
-
       sections.forEach((section) => {
         const sectionTop = section.offsetTop;
-        if (window.scrollY >= sectionTop - 250) {
+        const sectionHeight = section.offsetHeight;
+        const scrollPos = window.scrollY + 300;
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
           current = section.getAttribute("id") ?? "";
         }
       });
-
       navLinks.forEach((li) => {
         li.classList.remove("nav-active");
-
         if (li.getAttribute("href") === `#${current}`) {
           li.classList.add("nav-active");
-          console.log(li.getAttribute("href"));
         }
       });
     }
 
     void getLocomotive();
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -226,26 +79,51 @@ export default function Home() {
 
   useEffect(() => {
     if (!carouselApi) return;
-
     setCount(carouselApi.scrollSnapList().length);
     setCurrent(carouselApi.selectedScrollSnap() + 1);
-
     carouselApi.on("select", () => {
       setCurrent(carouselApi.selectedScrollSnap() + 1);
     });
   }, [carouselApi]);
 
-  // card hover effect
   useEffect(() => {
-    const tilt: HTMLElement[] = Array.from(document.querySelectorAll("#tilt"));
-    VanillaTilt.init(tilt, {
-      speed: 300,
-      glare: true,
-      "max-glare": 0.1,
-      gyroscope: true,
-      perspective: 900,
-      scale: 0.9,
-    });
+    const initializeTilt = () => {
+      const tilt: HTMLElement[] = Array.from(document.querySelectorAll("#tilt"));
+      const profileTilt: HTMLElement[] = Array.from(document.querySelectorAll("#profile-tilt"));
+      if (tilt.length > 0) {
+        VanillaTilt.init(tilt, {
+          speed: 300,
+          glare: true,
+          "max-glare": 0.1,
+          gyroscope: true,
+          perspective: 900,
+          scale: 0.9,
+        });
+      }
+      if (profileTilt.length > 0) {
+        VanillaTilt.init(profileTilt, {
+          speed: 400,
+          glare: true,
+          "max-glare": 0.15,
+          gyroscope: true,
+          perspective: 1000,
+          scale: 1.02,
+          max: 15,
+        });
+      }
+    };
+    initializeTilt();
+    const timer = setTimeout(initializeTilt, 1000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [carouselApi]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const canvas = document.createElement("canvas");
+    const gl = (canvas.getContext("webgl") || canvas.getContext("experimental-webgl")) as WebGLRenderingContext | null;
+    if (gl && typeof gl.getParameter === "function") setCanRenderSpline(true);
   }, []);
 
   return (
@@ -253,11 +131,11 @@ export default function Home() {
       <div ref={refScrollContainer}>
         <Gradient />
 
-        {/* Intro */}
+        {/* Home */}
         <section
           id="home"
           data-scroll-section
-          className="mt-40 md-20 flex w-full flex-col items-center xl:mt-0 xl:min-h-screen xl:flex-row xl:justify-between"
+          className="mt-32 flex w-full flex-col items-center xl:mt-0 xl:min-h-screen xl:flex-row xl:justify-between"
         >
           <div className={styles.intro}>
             <div
@@ -266,9 +144,9 @@ export default function Home() {
               data-scroll-speed=".09"
               className="flex flex-row items-center space-x-1.5"
             >
-              <span className={styles.pill}>Web Development</span>
-              <span className={styles.pill}>Problem Solving</span>
-              <span className={styles.pill}>Android UI Development</span>
+              {pills.map((pill) => (
+                <span key={pill} className={styles.pill}>{pill}</span>
+              ))}
             </div>
             <div>
               <h1
@@ -290,7 +168,7 @@ export default function Home() {
                 data-scroll-speed=".06"
                 className="mt-1 max-w-lg tracking-tight text-muted-foreground 2xl:text-xl"
               >
-                A passionate tech enthusiast and keen learner, driven by curiosity and innovation, aim to create impactful solutions in the tech world.
+                {heroDescription}
               </p>
             </div>
             <span
@@ -301,7 +179,7 @@ export default function Home() {
             >
               <Link href="https://drive.google.com/file/d/1bl4uwfV8MdEZQ8FeSAEiLNzOOcW1i6xC/view?usp=drive_link" passHref>
                 <Button>
-                  Resume <ChevronRight className="ml-1 h-4 w-4" />
+                  Resume <FaChevronRight className="ml-2 h-2 w-2" />
                 </Button>
               </Link>
               <Link href="mailto:evasabeeh@gmail.com">
@@ -312,16 +190,14 @@ export default function Home() {
                 </Button>
               </Link>
             </span>
-
             <div
               className={cn(
                 styles.scroll,
                 isScrolled && styles["scroll--hidden"],
               )}
             >
-              <Mouse className="!text-white relative z-10 mt-1 animate-bounce" size={50} /> 
+              <LuMouse className="!text-white relative z-10 mt-1 animate-bounce" size={50} />
             </div>
-
           </div>
           <div
             data-scroll
@@ -329,30 +205,30 @@ export default function Home() {
             id={styles["canvas-container"]}
             className="mt-14 h-full w-full xl:mt-0"
           >
-            <Suspense fallback={<span>Loading...</span>}>
+            {canRenderSpline ? (
               <Spline scene="/assets/scene.splinecode" />
-            </Suspense>
+            ) : (
+              <div className="flex h-full w-full items-center justify-center rounded-3xl border border-muted/40 bg-gradient-to-br from-background to-muted/10 p-8 text-center text-sm text-muted-foreground">
+                3D preview unavailable on this device. Please enable WebGL or try a different browser.
+              </div>
+            )}
           </div>
         </section>
 
-        <section className="mt-20">
+        {/* Social */}
+        <section id="social" className="mt-20">
           <div className="flex justify-center gap-6">
-            <Link href="https://linkedin.com/in/eva-sabeeh/">
-              <Button variant="outline" className="bg-transparent text-white size-20">
-                <Linkedin />
-              </Button>
-            </Link>
-            <Link href="https://github.com/evasabeeh/">
-              <Button variant="outline" className="bg-transparent text-white size-20">
-                <Github />
-              </Button>
-            </Link>
-            <Link href="https://linktr.ee/evasabeeh">
-              <Button variant="outline" className="bg-transparent text-white size-20">
-                <Code2 />
-              </Button>
-            </Link>
-            </div>
+            {socialLinks.map((social) => {
+              const Icon = social.icon === "LuLinkedin" ? LuLinkedin : social.icon === "FaGithub" ? FaGithub : FaCode;
+              return (
+                <Link key={social.name} href={social.href}>
+                  <Button variant="outline" className="bg-transparent text-white size-20 md:size-24">
+                    <Icon size={24} />
+                  </Button>
+                </Link>
+              );
+            })}
+          </div>
         </section>
 
         {/* About */}
@@ -361,14 +237,41 @@ export default function Home() {
             data-scroll
             data-scroll-speed=".4"
             data-scroll-position="top"
-            className="my-14 flex max-w-6xl flex-col justify-start space-y-10"
+            className="mt-14 flex max-w-6xl flex-col justify-start"
           >
-            <h2 className="py-16  pb-2 text-3xl font-light leading-normal tracking-tighter text-foreground xl:text-[40px]">
-              Hi! I&apos;m Eva, from Lucknow, the City of Nawabs.<br></br>
-              A final year Bachelor&apos;s student of Computer Science and Engineering at Chandigarh University. With a strong foundation in programming languages like C++ and Core Java, I excel in Problem-Solving and Object-Oriented Programming.<br></br>
-              Beyond coding, I have honed my skills in Web Development, driven by my passion for creating intuitive and visually appealing user experiences. Additionally, I have experience in Android UI Development, and dived into the MERN to build full-stack web applications.
-            </h2>
-            <div className="pt-20 grid grid-cols-2 gap-8 xl:grid-cols-2 justify-items-center">
+            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+
+              <div className="order-1 lg:order-2 flex-shrink-0">
+                <div 
+                  id="profile-tilt"
+                  className="relative w-48 h-80"
+                >
+                  <Image
+                    src="/assets/dp-img.jpg"
+                    alt="Eva Sabeeh"
+                    width={320}
+                    height={320}
+                    className="w-full h-full object-contain rounded-2xl shadow-2xl transition-all duration-300 hover:shadow-primary/20"
+                    quality={95}
+                    priority
+                  />
+
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-secondary rounded-2xl opacity-20 blur-sm"></div>
+                  <div className="absolute -top-4 -right-4 w-8 h-8 bg-primary/20 rounded-full blur-md"></div>
+                  <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-secondary/20 rounded-full blur-lg"></div>
+                </div>
+              </div>
+              
+              <div className="order-2 lg:order-1 flex-1">
+                <h2 className="py-12 text-xl font-light leading-normal tracking-tighter text-foreground xl:text-[32px]">
+                  {intro}
+                </h2>
+              </div>
+            </div>
+            
+            {/* Stats Section */}
+            <div
+              className="md:pt-20 grid grid-cols-2 gap-8 xl:grid-cols-2 justify-items-center">
               {aboutStats.map((stat) => (
                 <div
                   key={stat.label}
@@ -386,6 +289,185 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Experience */}
+        <section id="experience" data-scroll-section>
+          <div
+            data-scroll
+            data-scroll-speed=".6"
+            data-scroll-position="top"
+            data-scroll-enable-touch-speed
+            className="flex flex-col justify-start space-y-10"
+          >
+            <div className="flex flex-col pb-6 xl:p-1">
+              <h2 className="text-4xl font-medium tracking-tight">
+                Work <span className="text-gradient clash-grotesk tracking-normal">Experience</span>
+              </h2>
+              <p className="mt-2 tracking-tighter text-secondary-foreground">
+                My journey through various roles and projects
+              </p>
+            </div>
+
+            <div className="relative max-w-7xl mx-auto px-4">
+
+              <motion.div
+                initial={{ opacity: 0, y: -30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                viewport={{ once: true }}
+                className="relative mb-20 text-center"
+              >
+                <div className="md:ml-0 text-center relative z-30 rounded-lg px-3 py-2 sm:px-4">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold text-gradient clash-grotesk">
+                    Journey continues
+                  </div>
+                  <div className="text-xs sm:text-sm text-muted-foreground mt-1">
+                    Open to work
+                  </div>
+                </div>
+              </motion.div>
+
+              <div className="relative">
+
+                <div className="md:hidden absolute left-1/2 top-[-5rem] bottom-0 w-px bg-gradient-to-b from-primary to-primary/30 transform -translate-x-1/2 pointer-events-none" />
+
+                <div className="hidden md:flex justify-between items-center mb-2 relative">
+                  {experiences.map((experience, index) => {
+                    const month = experience.period.split(' ')[0];
+                    return (
+                      <motion.div
+                        key={`year-${index}`}
+                        initial={{ opacity: 0, y: -20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: index * 0.2 }}
+                        viewport={{ once: true }}
+                        className="flex flex-col items-center"
+                      >
+                        <div className="px-28 text-5xl lg:text-6xl xl:text-7xl font-bold text-gradient clash-grotesk">
+                          {month}
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+                <div className="hidden md:block relative mb-16">
+                  <div className="w-full h-1 bg-gradient-to-r from-primary via-primary to-primary/50 rounded-full">
+                    <motion.div
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      transition={{ duration: 2, ease: "easeInOut" }}
+                      viewport={{ once: true }}
+                      className="w-full h-full bg-gradient-to-r from-primary to-primary rounded-full origin-left"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-12">
+                  {experiences.map((experience, index) => (
+                    <motion.div
+                      key={experience.title}
+                      initial={{ 
+                        opacity: 0, 
+                        y: 50 
+                      }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.8,
+                        delay: index * 0.2,
+                        type: "spring",
+                        stiffness: 100,
+                      }}
+                      viewport={{ once: true }}
+                      className="relative group"
+                    >
+                      <motion.div
+                        className="hidden md:block absolute -top-16 left-1/2 transform -translate-x-1/2 w-px h-12 bg-gradient-to-b from-primary/80 to-primary/10"
+                        initial={{ scaleY: 0, opacity: 0 }}
+                        whileInView={{ scaleY: 1, opacity: 1 }}
+                        transition={{ duration: 0.8, delay: index * 0.2 + 1 }}
+                        viewport={{ once: true }}
+                        style={{ transformOrigin: 'top' }}
+                      />
+
+                      <div className="group relative z-10 overflow-hidden rounded-xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10 p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-primary/30 h-full">
+              
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="absolute -top-2 -right-2 w-16 h-16 bg-primary/10 rounded-full blur-xl group-hover:bg-primary/20 transition-colors duration-500" />
+                        <div className="absolute -bottom-2 -left-2 w-12 h-12 bg-secondary/10 rounded-full blur-lg group-hover:bg-secondary/20 transition-colors duration-500" />
+
+                        <div className="relative z-10">
+
+                          <motion.h4
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: index * 0.2 + 0.3 }}
+                            viewport={{ once: true }}
+                            className="text-xl lg:text-2xl font-semibold mb-3 leading-tight"
+                          >
+                            <span className="text-gradient clash-grotesk">
+                              {experience.title}
+                            </span>
+                          </motion.h4>
+
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: index * 0.2 + 0.5 }}
+                            viewport={{ once: true }}
+                            className="mb-4"
+                          >
+                            <h3 className="text-lg text-foreground font-medium mb-1">
+                              {experience.company}
+                            </h3>
+                            <p className="text-sm text-primary font-semibold">
+                              {experience.period}
+                            </p>
+                          </motion.div>
+
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: index * 0.2 + 0.7 }}
+                            viewport={{ once: true }}
+                            className="space-y-3"
+                          >
+                            <h5 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider">
+                              Tech Stack
+                            </h5>
+                            <div className="flex flex-wrap gap-2 justify-start">
+                              {experience.technologies.map((tech, techIndex) => (
+                                <motion.span
+                                  key={tech}
+                                  initial={{ opacity: 0, scale: 0, y: 20 }}
+                                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                                  transition={{
+                                    duration: 0.4,
+                                    delay: index * 0.2 + 0.9 + techIndex * 0.1,
+                                    type: "spring",
+                                    stiffness: 200,
+                                  }}
+                                  viewport={{ once: true }}
+                                  whileHover={{ 
+                                    scale: 1.1,
+                                    y: -2,
+                                    transition: { duration: 0.2 }
+                                  }}
+                                  className="px-3 py-1.5 bg-gradient-to-r from-white/10 to-white/5 text-foreground/90 rounded-full border border-white/20 text-xs font-medium hover:border-primary/40 hover:bg-primary/10 transition-all duration-200 cursor-default backdrop-blur-sm shadow-sm"
+                                >
+                                  {tech}
+                                </motion.span>
+                              ))}
+                            </div>
+                          </motion.div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Skills */}
         <section id="skills" data-scroll-section>
@@ -393,12 +475,12 @@ export default function Home() {
             data-scroll
             data-scroll-speed=".4"
             data-scroll-position="top"
+            data-scroll-enable-touch-speed
             className="flex flex-col justify-start space-y-10"
           >
-
-            <div className="flex flex-col py-6 xl:p-1">
+            <div className="flex flex-col py-16 xl:p-1">
               <h2 className="text-4xl font-medium tracking-tight">
-                Skill <span className="text-gradient clash-grotesk tracking-normal"> Section</span>
+                Skill & Platforms <span className="text-gradient clash-grotesk tracking-normal"> Section</span>
               </h2>
               <p className="mt-2 tracking-tighter text-secondary-foreground">
                 Here are my skills and expertise I own
@@ -410,35 +492,56 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{
                 duration: 1,
-                staggerChildren: 0.5,
+                staggerChildren: 0.1,
               }}
               viewport={{ once: true }}
-              className="flex flex-wrap items-center gap-1"
+              className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-4"
             >
-          
-              {skills.map((skill) => (
-                <div
+              {skills.map((skill, index) => (
+                <motion.div
                   key={skill.skill}
-                  className="flex flex-col items-start rounded-md bg-white/5 p-10 shadow-md backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-md"
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.05
+                  }}
+                  viewport={{ once: true }}
+                  className="group relative"
                 >
-                  <Image
-                    src={skill.image}
-                    alt="skill"
-                    width={100}
-                    height={100}
-                    className="w-20 h-20 object-contain rounded-md"
-                  />
-                </div>
+                  <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10 p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-primary/30 group">
+
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                    <div className="absolute -top-1 -right-1 w-8 h-8 bg-primary/10 rounded-full blur-lg group-hover:bg-primary/20 transition-colors duration-500" />
+                    <div className="absolute -bottom-1 -left-1 w-6 h-6 bg-secondary/10 rounded-full blur-md group-hover:bg-secondary/20 transition-colors duration-500" />
+
+                    <div className="relative z-10 flex flex-col items-center text-center">
+                      <div className="relative">
+                        <Image
+                          src={skill.image}
+                          alt={skill.skill}
+                          width={100}
+                          height={100}
+                          className="w-12 h-12 md:w-16 md:h-16 object-contain transition-transform duration-300 group-hover:scale-110"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
               ))}
             </motion.div>
           </div>
         </section>
 
-
         {/* Projects */}
         <section id="projects" data-scroll-section>
-          {/* Gradient */}
-          <div className="relative isolate -z-10">
+
+          <div 
+            data-scroll
+            data-scroll-speed=".8"
+            data-scroll-position="top" 
+            className="relative isolate -z-10">
             <div
               className="absolute inset-x-0 -top-40 transform-gpu overflow-hidden blur-[100px] sm:-top-80 lg:-top-60"
               aria-hidden="true"
@@ -452,18 +555,21 @@ export default function Home() {
               />
             </div>
           </div>
-          <div data-scroll data-scroll-speed=".4" className="my-16">
+          <div
+            data-scroll
+            data-scroll-enable-touch-speed
+            data-scroll-speed=".06"
+            className="mb-16">
             <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
               ✨ I got you here.
             </span>
             <h2 className="mt-3 text-4xl font-semibold tracking-tight xl:text-6xl">
-              Project <span className="text-gradient clash-grotesk tracking-normal"> Showcase</span> 
+              Project <span className="text-gradient clash-grotesk tracking-normal"> Showcase</span>
             </h2>
             <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
               I&apos;ve worked on a variety of projects, here are:
             </p>
 
-            {/* Carousel */}
             <div className="mt-14">
               <Carousel setApi={setCarouselApi} className="w-full">
                 <CarouselContent>
@@ -515,73 +621,241 @@ export default function Home() {
         </section>
 
         {/* Education */}
-        
-        <section id="services" data-scroll-section>
+        <section id="education" data-scroll-section className="overflow-hidden">
           <div
             data-scroll
             data-scroll-speed=".4"
-            data-scroll-position="top"
-            className="my-16 flex flex-col justify-start space-y-10"
+            className="flex flex-col justify-start space-y-10"
           >
-            <div className="flex flex-col py-6 xl:p-1">
+            <div 
+              className="flex flex-col pt-6 xl:p-1">
               <h2 className="text-4xl font-medium tracking-tight">
                 Education <span className="text-gradient clash-grotesk tracking-normal">Background</span>
               </h2>
               <p className="mt-2 tracking-tighter text-secondary-foreground">
-                Here is my education background.
+                My academic foundation and learning path
               </p>
             </div>
 
-            <div className="relative flex flex-col items-center gap-2">
-              {/* Vertical Line for Timeline */}
-              <div className="absolute inset-y-0 left-1/2 w-px bg-primary/50"></div>
+            <div className="relative max-w-full mx-auto overflow-hidden">
 
               <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{
-                  duration: 1,
-                  staggerChildren: 0.5,
-                }}
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="flex flex-col items-center gap-10 relative z-10"
+                className="relative flex justify-center mb-12 sm:mb-16 z-20"
               >
-                {services.map((service) => (
-                  <div
-                    key={service.service}
-                    className="flex flex-col items-start rounded-md bg-white/5 p-6 shadow-md backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-md w-full max-w-md"
-                  >
-                    <span className="text-lg tracking-tight text-foreground">{service.service}</span>
-                    <span className="text-lg tracking-tight text-primary">{service.year}</span>
-                    <span className="mt-2 tracking-tighter text-muted-foreground">{service.description}</span>
+                <div className="md:ml-0 text-center relative z-30 rounded-lg px-3 py-2 sm:px-4">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-semibold text-gradient clash-grotesk">
+                    Graduated
+                  </div>
+                  <div className="text-5xl md:text-6xl font-bold text-primary/20 clash-grotesk">
+                    2025
+                  </div>
+                  <div className="text-xs sm:text-sm text-muted-foreground mt-1">
+                    Academic Excellence
+                  </div>
+                </div>
+              </motion.div>
+
+              <div className="absolute left-6 sm:left-8 md:left-1/2 top-32 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary/50 to-transparent transform md:-translate-x-px z-10 hidden md:block">
+                <motion.div
+                  initial={{ scaleY: 0 }}
+                  whileInView={{ scaleY: 1 }}
+                  transition={{ duration: 2, ease: "easeInOut" }}
+                  viewport={{ once: true }}
+                  className="w-full h-full bg-gradient-to-b from-primary to-primary/30 origin-top"
+                />
+              </div>
+
+              <div className="absolute left-1/2 transform -translate-x-1/2 top-24 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary/50 to-transparent md:hidden z-0">
+                <motion.div
+                  initial={{ scaleY: 0 }}
+                  whileInView={{ scaleY: 1 }}
+                  transition={{ duration: 2, ease: "easeInOut" }}
+                  viewport={{ once: true }}
+                  className="w-full h-full bg-gradient-to-b from-primary to-primary/30 origin-top"
+                />
+              </div>
+
+              <div className="space-y-6 md:space-y-10">
+                {education.map((educationItem, index) => (
+                  <div key={educationItem.course}>
+                    <motion.div
+                      initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.8, delay: index * 0.3 }}
+                      viewport={{ once: true }}
+                      className={`relative flex items-center ${index % 2 === 0
+                          ? 'md:flex-row flex-col'
+                          : 'md:flex-row-reverse flex-col'
+                        }`}
+                    >
+                      <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: index * 0.3 + 0.7 }}
+                        viewport={{ once: true }}
+                        className={`group relative md:ml-0 ${index % 2 === 0
+                            ? 'md:mr-4 lg:mr-8 md:text-right'
+                            : 'md:ml-4 lg:ml-8 md:text-left'
+                          } md:w-5/12 lg:w-1/2 w-full md:pr-0 z-20`}
+                      >
+                        <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10 p-4 sm:p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-primary/30 group z-10">
+
+                          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                          <div className="absolute -top-2 -right-2 w-16 h-16 sm:w-20 sm:h-20 bg-primary/10 rounded-full blur-xl group-hover:bg-primary/20 transition-colors duration-500" />
+                          <div className="absolute -bottom-2 -left-2 w-12 h-12 sm:w-16 sm:h-16 bg-secondary/10 rounded-full blur-lg group-hover:bg-secondary/20 transition-colors duration-500" />
+
+                          <div className="relative z-10">
+
+                            <motion.div
+                              initial={{ opacity: 0, y: 20 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.6, delay: index * 0.3 + 1.2 }}
+                              viewport={{ once: true }}
+                            >
+                              <h3 className="text-md sm:text-lg lg:text-xl font-semibold tracking-tight text-foreground">
+                                {educationItem.course}
+                              </h3>
+                              <h4 className="text-base sm:text-md lg:text-lg text-semibold text-gradient clash-grotesk mb-3 sm:mb-4">
+                                {educationItem.college}
+                              </h4>
+                            </motion.div>
+
+                            <motion.div
+                              initial={{ opacity: 0, y: 20 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.6, delay: index * 0.3 + 1.6 }}
+                              viewport={{ once: true }}
+                              className="space-y-1"
+                            >
+                              <span className="text-xs font-medium text-foreground/70 uppercase tracking-wider">
+                                Academic Focus
+                              </span>
+                              <div className={`flex flex-wrap gap-1 ${index % 2 === 0 ? 'md:justify-end justify-start' : 'md:justify-start justify-start'
+                                }`}>
+                                {educationItem.academicFocus.map((subject, subjectIndex) => (
+                                  <motion.span
+                                    key={subject}
+                                    initial={{ opacity: 0, scale: 0 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    transition={{
+                                      duration: 0.4,
+                                      delay: index * 0.3 + 1.8 + subjectIndex * 0.1
+                                    }}
+                                    viewport={{ once: true }}
+                                    className="px-2 py-1 text-xs font-medium bg-white/10 text-foreground/80 rounded-full border border-white/20 hover:bg-primary/20 hover:text-primary hover:border-primary/30 transition-all duration-200 cursor-default"
+                                  >
+                                    {subject}
+                                  </motion.span>
+                                ))}
+                              </div>
+                            </motion.div>
+                          </div>
+                        </div>
+                      </motion.div>
+
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.6, delay: index * 0.3 + 0.9 }}
+                        viewport={{ once: true }}
+                        className={`hidden md:block ${index % 2 === 0 ? 'md:ml-4 lg:ml-8' : 'md:mr-4 lg:mr-8'
+                          } md:w-5/12 lg:w-2/5 z-20`}
+                      >
+                        <div className={`${index % 2 === 0 ? 'text-left' : 'text-right'
+                          }`}>
+                          <div className="text-4xl lg:text-5xl xl:text-6xl font-bold text-primary/20 clash-grotesk">
+                            {educationItem.year}
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            {educationItem.duration}
+                          </div>
+                        </div>
+                      </motion.div>
+                    </motion.div>
+
+                    {index < education.length - 1 && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.6, delay: index * 0.3 + 1.5 }}
+                        viewport={{ once: true }}
+                        className="md:hidden relative flex justify-center my-6 z-20"
+                      >
+                        <div className="text-center bg-background/80 backdrop-blur-sm rounded-lg px-3 py-2">
+                          <div className="text-5xl font-bold text-primary/30 clash-grotesk">
+                            {education[index + 1]?.year}
+                          </div>
+                          <div className="text-md text-muted-foreground mt-1">
+                            Pass out
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
                   </div>
                 ))}
-              </motion.div>
+              </div>
             </div>
           </div>
         </section>
 
-
-
         {/* Contact */}
         <section id="contact" data-scroll-section className="my-16">
-          <div
-            data-scroll
-            data-scroll-speed=".4"
-            data-scroll-position="top"
-            className="flex flex-col items-center justify-center rounded-lg bg-gradient-to-br from-primary/[6.5%] to-white/5 px-8 py-16 text-center xl:py-24"
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10 px-8 py-16 xl:py-24 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-primary/30"
           >
-            <h2 className="text-4xl font-medium tracking-tighter xl:text-6xl">
-              Let&apos;s{" "}
-              <span className="text-gradient clash-grotesk">Connect.</span>
-            </h2>
-            <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
-              Actively seeking opportunities to contribute and grow while delivering impactful solutions.
-            </p>
-            <Link href="mailto:evasabeeh@gmail.com" passHref>
-              <Button className="mt-6">Get in touch</Button>
-            </Link>
-          </div>
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+            <div className="absolute -top-2 -right-2 w-32 h-32 bg-primary/10 rounded-full blur-xl group-hover:bg-primary/20 transition-colors duration-500" />
+            <div className="absolute -bottom-2 -left-2 w-24 h-24 bg-secondary/10 rounded-full blur-lg group-hover:bg-secondary/20 transition-colors duration-500" />
+            <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-primary/5 rounded-full blur-md group-hover:bg-primary/15 transition-colors duration-700" />
+
+            <div 
+              data-scroll
+              data-scroll-speed=".2"
+              data-scroll-enable-touch-speed
+            className="relative z-10 flex flex-col items-center justify-center text-center">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="text-4xl font-medium tracking-tighter xl:text-6xl group-hover:text-primary transition-colors duration-300"
+              >
+                Let&apos;s{" "}
+                <span className="text-gradient clash-grotesk">Connect.</span>
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="mt-4 text-base tracking-tight text-muted-foreground xl:text-lg max-w-2xl"
+              >
+                Actively seeking opportunities to contribute and grow while delivering impactful solutions.
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <Link href="mailto:evasabeeh@gmail.com" passHref>
+                  <Button className="mt-8 transform transition-all duration-300 hover:scale-110 hover:shadow-lg">
+                    Get in touch
+                  </Button>
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
         </section>
       </div>
     </Container>
@@ -591,8 +865,7 @@ export default function Home() {
 function Gradient() {
   return (
     <>
-      {/* Upper gradient */}
-      <div className="absolute -top-40 right-0 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
+      <div className="absolute -top-40 sm:-top-80 right-0 -z-10 transform-gpu overflow-hidden blur-3xl">
         <svg
           className="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
           viewBox="0 0 1155 678"
@@ -618,7 +891,6 @@ function Gradient() {
         </svg>
       </div>
 
-      {/* Lower gradient */}
       <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
         <svg
           className="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]"

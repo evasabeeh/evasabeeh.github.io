@@ -40,22 +40,19 @@
 
 /* global elements */
 @layer base {
-  html[data-scroll-orientation="horizontal"] {
-    body {
-      @apply w-fit;
-    }
-    [data-scroll-container] {
-      @apply flex;
-    }
-  }
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
   html {
-    @apply antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
   body {
-    @apply bg-background text-foreground cursor-wait;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    cursor: wait;
+    overflow-x: hidden;
   }
   section {
     scroll-margin-top: 60px;
@@ -65,16 +62,18 @@
 /* custom scrollbar */
 @layer base {
   ::-webkit-scrollbar {
-    @apply h-2.5 w-2 transition;
+    height: 10px; /* h-2.5 = 0.625rem = 10px */
+    width: 8px;   /* w-2 = 0.5rem = 8px */
+    transition: all 0.2s;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-background;
+    background-color: hsl(var(--background));
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-muted;
+    background-color: hsl(var(--muted));
   }
   ::-webkit-scrollbar-thumb:active {
-    @apply bg-primary;
+    background-color: hsl(var(--primary));
   }
 }
 
@@ -84,27 +83,21 @@
     font-family: "ClashGrotesk-Variable", sans-serif;
   }
   .text-gradient {
-    @apply bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent;
+    background-image: linear-gradient(to bottom right, hsl(var(--primary)), hsl(var(--secondary)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
   .nav-active {
-    color: rgb(226 232 240) !important;
-    @apply text-sm lowercase tracking-tight text-slate-200;
+    color: white !important;
+    font-size: 0.975rem;
+    text-transform: lowercase;
+    letter-spacing: -0.015em;
   }
   .nav-link {
-    /* Remove the styles from nav-link class */
-    @apply text-sm lowercase tracking-tight text-slate-400;
-  }
-
-  /* blinking animation */
-  @keyframes blink {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-  .animate-blink {
-    animation: blink 1s infinite;
+    font-size: 0.975rem;
+    text-transform: lowercase;
+    letter-spacing: -0.015em;
+    color: rgb(148 163 184);
   }
 }

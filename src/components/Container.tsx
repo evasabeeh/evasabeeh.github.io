@@ -2,24 +2,20 @@
 import Head from "next/head";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { cn, scrollTo } from "../lib/utils";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Footer from "./Footer";
 import Preloader from "./Preloader";
 import styles from "../styles/Container.module.css";
-import Image from "next/image";
+import { cn, scrollTo } from "../lib/utils";
 
-type IconProps = {
-  ["data-hide"]: boolean;
-};
-
+type IconProps = { ["data-hide"]: boolean };
 type ContainerProps = {
   children: React.ReactNode;
   title?: string;
   description?: string;
   className?: string;
 };
-
 type NavProps = {
   text: string;
   href: string;
@@ -30,24 +26,21 @@ type NavProps = {
 const variants = {
   visible: (i: number) => ({
     opacity: 1,
-    transition: {
-      delay: i * 0.12,
-    },
+    transition: { delay: i * 0.12 },
   }),
   hidden: { opacity: 0 },
 };
-
 const navLinks = [
   { href: "#home", text: "Home" },
   { href: "#about", text: "About" },
+  { href: "#experience", text: "Experience" },
   { href: "#skills", text: "Skills" },
   { href: "#projects", text: "Projects" },
-  { href: "#services", text: "Education" },
+  { href: "#education", text: "Education" },
 ];
 
 function handleClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
   const href = e.currentTarget.getAttribute("href");
-
   if (href && href.startsWith("#")) {
     e.preventDefault();
     const section = document.querySelector(href);
@@ -77,9 +70,9 @@ function NavItem(props: NavProps) {
 }
 
 export default function Container(props: ContainerProps) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { children, ...customMeta } = props;
   const meta = {
@@ -90,20 +83,12 @@ export default function Container(props: ContainerProps) {
     ...customMeta,
   };
 
-  // handle scroll
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 0);
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // preloader effect
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
@@ -124,15 +109,15 @@ export default function Container(props: ContainerProps) {
         <meta property="og:description" content={meta.description} />
         <meta property="og:title" content={meta.title} />
         <meta property="og:image" content={meta.image} />
-
-        <link rel="apple-touch-icon" href="public\logo.png" />
+        <link rel="apple-touch-icon" href="public/assets/logo.png" />
       </Head>
+
       <nav
         className={cn(
           styles.nav,
           isScrolled
             ? "bg-gradient-to-br from-background to-transparent shadow-md backdrop-blur transition"
-            : "bg-transparent",
+            : "bg-transparent"
         )}
       >
         <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
@@ -140,7 +125,7 @@ export default function Container(props: ContainerProps) {
             onClick={() => setIsOpen(!isOpen)}
             className={cn(
               styles.burger,
-              "inline-flex transform items-center justify-center rounded-md p-2 transition-all duration-300 focus:outline-none",
+              "inline-flex transform items-center justify-center rounded-md p-2 transition-all duration-300 focus:outline-none"
             )}
             aria-controls="mobile-menu"
             aria-expanded="false"
@@ -150,19 +135,17 @@ export default function Container(props: ContainerProps) {
             <CrossIcon data-hide={!isOpen} />
           </button>
         </div>
-        
 
         <Link href="/">
           <Image
             src="assets/logo.png"
             alt="Eva Sabeeh"
-            width="25"
-            height="15"
+            width={25}
+            height={15}
             className="mx-5"
           />
         </Link>
 
-        {/* Desktop menu */}
         <ul className={styles["desktop-nav"]}>
           {navLinks.map((link, i) => (
             <NavItem
@@ -175,7 +158,6 @@ export default function Container(props: ContainerProps) {
           ))}
         </ul>
 
-        {/* Mobile menu */}
         <AnimatePresence key="menu">
           {isOpen && (
             <motion.div
@@ -185,7 +167,6 @@ export default function Container(props: ContainerProps) {
               exit={{ x: "100%" }}
               transition={{ duration: 1, type: "spring", bounce: 0.25 }}
             >
-              {/* Expandable menu */}
               <div className="flex h-20 max-h-20 min-h-[60px] w-full items-center justify-between border-b pl-[22px] pr-1">
                 <span className="text-base font-medium lowercase">Menu</span>
                 <button
@@ -199,7 +180,6 @@ export default function Container(props: ContainerProps) {
                 </button>
               </div>
               <div className="flex h-full flex-col items-start justify-between overflow-y-auto">
-                {/* Links */}
                 <ul className="flex min-h-fit w-full flex-col items-start space-y-6 px-[22px] py-[58px]">
                   {navLinks.map((link, i) => (
                     <button key={link.href} onClick={() => setIsOpen(false)}>
@@ -212,8 +192,6 @@ export default function Container(props: ContainerProps) {
                     </button>
                   ))}
                 </ul>
-
-                {/* Footer */}
                 <div className="flex min-h-fit w-full flex-col space-y-8 px-[22px] py-10">
                   <span className="text-sm text-muted-foreground">
                     © {new Date().getFullYear()} Eva Sabeeh.
@@ -235,12 +213,10 @@ export default function Container(props: ContainerProps) {
         `}</style>
       </nav>
 
-      {/* Preloader */}
       <AnimatePresence mode="wait">
         {isLoading && <Preloader />}
       </AnimatePresence>
 
-      {/* Main content */}
       <main className={cn("container", props.className)}>{children}</main>
       <Footer />
     </>
@@ -258,27 +234,9 @@ function MenuIcon(props: IconProps) {
       fill="none"
       {...props}
     >
-      <path
-        d="M2.5 2.5H17.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M2.5 7.5H17.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M2.5 12.5H17.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M2.5 2.5H17.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M2.5 7.5H17.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M2.5 12.5H17.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

@@ -2,7 +2,7 @@ import * as React from "react";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
@@ -59,26 +59,25 @@ const Carousel = React.forwardRef<
       {
         ...opts,
         axis: orientation === "horizontal" ? "x" : "y",
-        loop: true, // Enable loop functionality
+        loop: true,
       },
       plugins,
     );
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
 
-    const onSelect = React.useCallback((api: CarouselApi) => {
-      if (!api) return;
-
-      setCanScrollPrev(api.canScrollPrev());
-      setCanScrollNext(api.canScrollNext());
+    const onSelect = React.useCallback((emblaApi: CarouselApi) => {
+      if (!emblaApi) return;
+      setCanScrollPrev(emblaApi.canScrollPrev());
+      setCanScrollNext(emblaApi.canScrollNext());
     }, []);
 
     const scrollPrev = React.useCallback(() => {
-      api?.scrollPrev();
+      if (api) api.scrollPrev();
     }, [api]);
 
     const scrollNext = React.useCallback(() => {
-      api?.scrollNext();
+      if (api) api.scrollNext();
     }, [api]);
 
     React.useEffect(() => {
@@ -98,31 +97,32 @@ const Carousel = React.forwardRef<
       };
     }, [api, onSelect]);
 
-    return (
-      <CarouselContext.Provider
-        value={{
+        const contextValue = React.useMemo(() => ({
           carouselRef,
-          api: api,
+          api,
           opts,
-          orientation:
-            orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
+          orientation: orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
           scrollPrev,
           scrollNext,
           canScrollPrev,
           canScrollNext,
-        }}
-      >
-        <div
-          ref={ref}
-          className={cn("relative overflow-hidden", className)}
-          role="region"
-          aria-roledescription="carousel"
-          {...props}
-        >
-          {children}
-        </div>
-      </CarouselContext.Provider>
-    );
+        }), [carouselRef, api, opts, orientation, scrollPrev, scrollNext, canScrollPrev, canScrollNext]);
+
+        const memoChildren = React.useMemo(() => children, [children]);
+
+        return (
+          <CarouselContext.Provider value={contextValue}>
+            <div
+              ref={ref}
+              className={cn("relative overflow-hidden", className)}
+              role="region"
+              aria-roledescription="carousel"
+              {...props}
+            >
+              {memoChildren}
+            </div>
+          </CarouselContext.Provider>
+        );
   },
 );
 Carousel.displayName = "Carousel";
@@ -173,8 +173,9 @@ const CarouselPrevious = React.forwardRef<
       ref={ref}
       variant="ghost"
       className={cn(
-        "absolute h-10 w-10 rounded-full bg-transparent text-white border border-white transition-colors duration-200", // Transparent button with white arrow and border
-        "hover:bg-white hover:text-black",
+        "absolute h-10 w-10 rounded-full bg-black/20 backdrop-blur-sm text-white border border-white/50 transition-all duration-200",
+        "hover:bg-white hover:text-black hover:border-white",
+        "hidden md:flex items-center justify-center",
         orientation === "horizontal"
           ? "left-4 top-1/2 -translate-y-1/2"
           : "top-4 left-1/2 -translate-x-1/2 rotate-90",
@@ -184,7 +185,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft className="h-6 w-6" />
+      <FaChevronLeft className="h-4 w-4 text-white" />
     </Button>
 
   );
@@ -202,8 +203,9 @@ const CarouselNext = React.forwardRef<
       ref={ref}
       variant="ghost"
       className={cn(
-        "absolute h-10 w-10 rounded-full bg-transparent text-white border border-white transition-colors duration-200", // Transparent with white border and icon
-        "hover:bg-white hover:text-black", 
+        "absolute h-10 w-10 rounded-full bg-black/20 backdrop-blur-sm text-white border border-white/50 transition-all duration-200",
+        "hover:bg-white hover:text-black hover:border-white",
+        "hidden md:flex items-center justify-center",
         orientation === "horizontal"
           ? "right-4 top-1/2 -translate-y-1/2"
           : "bottom-4 left-1/2 -translate-x-1/2 rotate-90",
@@ -213,13 +215,12 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight className="text-white h-6 w-6" />  
+      <FaChevronRight className="h-4 w-4 text-white" />
     </Button>
 
   );
 });
 CarouselNext.displayName = "CarouselNext";
-
 
 export {
   type CarouselApi,
