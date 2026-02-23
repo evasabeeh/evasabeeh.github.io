@@ -122,7 +122,7 @@ export default function Home() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const canvas = document.createElement("canvas");
-    const gl = (canvas.getContext("webgl") || canvas.getContext("experimental-webgl")) as WebGLRenderingContext | null;
+    const gl = (canvas.getContext("webgl") ?? canvas.getContext("experimental-webgl")) as WebGLRenderingContext | null;
     if (gl && typeof gl.getParameter === "function") setCanRenderSpline(true);
   }, []);
 
