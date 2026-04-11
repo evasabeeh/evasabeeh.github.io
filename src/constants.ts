@@ -53,49 +53,49 @@ export const projects = [
     {
         title: "Optimized Travel Route Planner",
         description: "Utilizes data structure to calculate the optimal route",
-        image: "/projects/travelroute.png",
+        image: "/projects/travelroute.webp",
         href: "https://github.com/evasabeeh/TravelRoutePlanner",
     },
     {
         title: "PCB & Electronics Shop",
         description: "An e-commerce platform for PCB and electronic components",
-        image: "/projects/pcb.png",
+        image: "/projects/pcb.webp",
         href: "https://www.prathmeshengineering.com/",
     },
     {
         title: "Food Ordering system",
         description: "Full-stack real-time MERN app",
-        image: "/projects/food.png",
+        image: "/projects/food.webp",
         href: "https://fooddelivery-frontend-szy1.onrender.com/",
     },
     {
         title: "Nextute - EdTech Platform",
         description: "An EdTech platform for learning and upskilling",
-        image: "/projects/nextute.png",
+        image: "/projects/nextute.webp",
         href: "https://www.nextute.com/",
     },
     {
         title: "Social Media Website",
         description: "Focused on frontend for a social media site",
-        image: "/projects/socialmedia.png",
+        image: "/projects/socialmedia.webp",
         href: "https://evasabeeh-socialmediawebsite.vercel.app/",
     },
     {
         title: "Amazon Frontend Clone",
         description: "Replicates Amazon's user-friendly interface",
-        image: "/projects/amazon.png",
+        image: "/projects/amazon.webp",
         href: "https://evasabeeh-amazonclone.vercel.app/",
     },
     {
         title: "Bookmania - Digitized Bookstore",
         description: "Responsive and mobile-first layout",
-        image: "/projects/bookmania.png",
+        image: "/projects/bookmania.webp",
         href: "https://evasabeeh-bookmania.vercel.app/",
     },
     {
         title: "Melofy - Spotify inspired app",
         description: "An Android music playback application inspired by Spotify",
-        image: "/projects/melofy.png",
+        image: "/projects/melofy.webp",
         href: "https://github.com/evasabeeh/Melofy/releases/tag/android-app",
     },
 ];
@@ -103,79 +103,79 @@ export const projects = [
 export const skills = [
     {
         skill: "C++",
-        image: "/skills/cpp.png",
+        image: "/skills/cpp.webp",
     },
     {
         skill: "Core Java",
-        image: "/skills/java.png",
+        image: "/skills/java.webp",
     },
     {
         skill: "HTML",
-        image: "/skills/html.png",
+        image: "/skills/html.webp",
     },
     {
         skill: "CSS",
-        image: "/skills/css.png",
+        image: "/skills/css.webp",
     },
     {
         skill: "JavaScript",
-        image: "/skills/js.png",
+        image: "/skills/js.webp",
     },
     {
         skill: "TypeScript",
-        image: "/skills/typescript.png",
+        image: "/skills/typescript.webp",
     },
     {
         skill: "React Native",
-        image: "/skills/react-native.png",
+        image: "/skills/react-native.webp",
     },
     {
         skill: "React JS",
-        image: "/skills/react.png",
+        image: "/skills/react.webp",
     },
     {
         skill: "Next JS",
-        image: "/skills/nextjs.png",
+        image: "/skills/nextjs.webp",
     },
     {
         skill: "Tailwind CSS",
-        image: "/skills/tailwind.png",
+        image: "/skills/tailwind.webp",
     },
     {
         skill: "Git",
-        image: "/skills/git.png",
+        image: "/skills/git.webp",
     },
     {
         skill: "GitHub",
-        image: "/skills/github.png",
+        image: "/skills/github.webp",
     },
     {
         skill: "Postgre SQL",
-        image: "/skills/postgresql.png",
+        image: "/skills/postgresql.webp",
     },
     {
         skill: "Strapi",
-        image: "/skills/strapi.png",
+        image: "/skills/strapi.webp",
     },
     {
         skill: "MySQL",
-        image: "/skills/mysql.png",
+        image: "/skills/mysql.webp",
     },
     {
         skill: "Jetpack Compose",
-        image: "/skills/jetpack.png",
+        image: "/skills/jetpack.webp",
     },
     {
         skill: "Bootstrap",
-        image: "/skills/bootstrap.png",
+        image: "/skills/bootstrap.webp",
     },
     {
         skill: "Sass",
-        image: "/skills/sass.png",
+        image: "/skills/sass.webp",
     },
     {
         skill: "Material UI",
-        image: "/skills/mui.png",
+        image: "/skills/mui.webp",
     },
     {
         skill: "prisma",
@@ -183,39 +183,39 @@ export const skills = [
     },
     {
         skill: "Vite",
-        image: "/skills/vite.png",
+        image: "/skills/vite.webp",
     },
     {
         skill: "VS Code",
-        image: "/skills/vs.png",
+        image: "/skills/vs.webp",
     },
     {
         skill: "Figma",
-        image: "/skills/figma.png",
+        image: "/skills/figma.webp",
     },
     {
         skill: "Android Studio",
-        image: "/skills/android.png",
+        image: "/skills/android.webp",
     },
     {
         skill: "Node JS",
-        image: "/skills/nodejs.png",
+        image: "/skills/nodejs.webp",
     },
     {
         skill: "MongoDB",
-        image: "/skills/mongo.png",
+        image: "/skills/mongo.webp",
     },
     {
         skill: "Firebase",
-        image: "/skills/firebase.png",
+        image: "/skills/firebase.webp",
     },
     {
         skill: "Postman",
-        image: "/skills/postman.png",
+        image: "/skills/postman.webp",
     },
     {
         skill: "Vercel",
-        image: "/skills/vercel.png",
+        image: "/skills/vercel.webp",
     },
     {
         skill: "npm",

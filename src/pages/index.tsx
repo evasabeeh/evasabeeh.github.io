@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import VanillaTilt from "vanilla-tilt";
 import { motion } from "framer-motion";
 import { FaChevronRight, FaGithub, FaCode } from "react-icons/fa";
 import { LuLinkedin, LuMouse } from "react-icons/lu";
@@ -87,7 +86,8 @@ export default function Home() {
   }, [carouselApi]);
 
   useEffect(() => {
-    const initializeTilt = () => {
+    const initializeTilt = async () => {
+      const VanillaTilt = (await import("vanilla-tilt")).default;
       const tilt: HTMLElement[] = Array.from(document.querySelectorAll("#tilt"));
       const profileTilt: HTMLElement[] = Array.from(document.querySelectorAll("#profile-tilt"));
       if (tilt.length > 0) {
@@ -112,8 +112,10 @@ export default function Home() {
         });
       }
     };
-    initializeTilt();
-    const timer = setTimeout(initializeTilt, 1000);
+    void initializeTilt();
+    const timer = setTimeout(() => {
+      void initializeTilt();
+    }, 1000);
     return () => {
       clearTimeout(timer);
     };
@@ -251,12 +253,13 @@ export default function Home() {
                   className="relative w-48 h-80"
                 >
                   <Image
-                    src="/assets/dp-img.jpg"
+                    src="/assets/dp-img.webp"
                     alt="Eva Sabeeh"
-                    width={320}
-                    height={320}
+                    width={360}
+                    height={603}
                     className="w-full h-full object-contain rounded-2xl shadow-2xl transition-all duration-300 hover:shadow-primary/20"
-                    quality={95}
+                    sizes="(max-width: 1024px) 192px, 287px"
+                    quality={75}
                     priority
                   />
 
@@ -527,6 +530,8 @@ export default function Home() {
                           alt={skill.skill}
                           width={100}
                           height={100}
+                          sizes="(max-width: 768px) 48px, 64px"
+                          quality={70}
                           className="w-12 h-12 md:w-16 md:h-16 object-contain transition-transform duration-300 group-hover:scale-110"
                         />
                       </div>
@@ -596,7 +601,8 @@ export default function Home() {
                                 alt={project.title}
                                 width={600}
                                 height={300}
-                                quality={100}
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                quality={75}
                                 className="aspect-video h-full w-full rounded-t-md bg-primary object-cover"
                               />
                             )}

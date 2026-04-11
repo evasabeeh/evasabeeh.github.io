@@ -78,7 +78,7 @@ export default function Container(props: ContainerProps) {
   const meta = {
     title: "Eva Sabeeh",
     description: `Tech Enthusiast`,
-    image: "public/assets/logo.png",
+    image: "/assets/logo.webp",
     type: "website",
     ...customMeta,
   };
@@ -109,7 +109,7 @@ export default function Container(props: ContainerProps) {
         <meta property="og:description" content={meta.description} />
         <meta property="og:title" content={meta.title} />
         <meta property="og:image" content={meta.image} />
-        <link rel="apple-touch-icon" href="public/assets/logo.png" />
+        <link rel="apple-touch-icon" href="/assets/logo.png" />
       </Head>
 
       <nav
@@ -138,7 +138,7 @@ export default function Container(props: ContainerProps) {
 
         <Link href="/">
           <Image
-            src="assets/logo.png"
+            src="/assets/logo.webp"
             alt="Eva Sabeeh"
             width={25}
             height={15}
