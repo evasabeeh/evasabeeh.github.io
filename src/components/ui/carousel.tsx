@@ -172,6 +172,7 @@ const CarouselPrevious = React.forwardRef<
     <Button
       ref={ref}
       variant="ghost"
+      aria-label="Previous slide"
       className={cn(
         "absolute h-10 w-10 rounded-full bg-black/20 backdrop-blur-sm text-white border border-white/50 transition-all duration-200",
         "hover:bg-white hover:text-black hover:border-white",
@@ -202,6 +203,7 @@ const CarouselNext = React.forwardRef<
     <Button
       ref={ref}
       variant="ghost"
+      aria-label="Next slide"
       className={cn(
         "absolute h-10 w-10 rounded-full bg-black/20 backdrop-blur-sm text-white border border-white/50 transition-all duration-200",
         "hover:bg-white hover:text-black hover:border-white",

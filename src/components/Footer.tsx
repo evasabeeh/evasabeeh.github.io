@@ -50,7 +50,7 @@ export default function Footer() {
           passHref
           className="text-xs text-muted-foreground hover:text-foreground"
         >
-          <Button variant="outline">
+          <Button variant="outline" aria-label="Email Eva Sabeeh">
             <LuMail className="h-4 w-4 md:mr-2" />
             <span className="hidden md:flex">evasabeeh@gmail.com</span>
           </Button>

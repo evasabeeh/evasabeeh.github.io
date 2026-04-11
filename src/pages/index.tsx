@@ -222,7 +222,11 @@ export default function Home() {
               const Icon = social.icon === "LuLinkedin" ? LuLinkedin : social.icon === "FaGithub" ? FaGithub : FaCode;
               return (
                 <Link key={social.name} href={social.href}>
-                  <Button variant="outline" className="bg-transparent text-white size-20 md:size-24">
+                  <Button
+                    variant="outline"
+                    className="bg-transparent text-white size-20 md:size-24"
+                    aria-label={`Open ${social.name}`}
+                  >
                     <Icon size={24} />
                   </Button>
                 </Link>
@@ -397,7 +401,7 @@ export default function Home() {
 
                         <div className="relative z-10">
 
-                          <motion.h4
+                          <motion.h3
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: index * 0.2 + 0.3 }}
@@ -407,7 +411,7 @@ export default function Home() {
                             <span className="text-gradient clash-grotesk">
                               {experience.title}
                             </span>
-                          </motion.h4>
+                          </motion.h3>
 
                           <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -416,9 +420,9 @@ export default function Home() {
                             viewport={{ once: true }}
                             className="mb-4"
                           >
-                            <h3 className="text-lg text-foreground font-medium mb-1">
+                            <p className="text-lg text-foreground font-medium mb-1">
                               {experience.company}
-                            </h3>
+                            </p>
                             <p className="text-sm text-primary font-semibold">
                               {experience.period}
                             </p>
@@ -431,9 +435,9 @@ export default function Home() {
                             viewport={{ once: true }}
                             className="space-y-3"
                           >
-                            <h5 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider">
+                            <h4 className="text-xs font-semibold text-foreground/70 uppercase tracking-wider">
                               Tech Stack
-                            </h5>
+                            </h4>
                             <div className="flex flex-wrap gap-2 justify-start">
                               {experience.technologies.map((tech, techIndex) => (
                                 <motion.span
