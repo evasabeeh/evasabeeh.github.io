@@ -37,6 +37,8 @@ export default function Home() {
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
   const [canRenderSpline, setCanRenderSpline] = useState(false);
+  const [showFallback, setShowFallback] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const sections = document.querySelectorAll("section");
@@ -128,6 +130,18 @@ export default function Home() {
     if (gl && typeof gl.getParameter === "function") setCanRenderSpline(true);
   }, []);
 
+  useEffect(() => {
+    if (!canRenderSpline) return;
+
+    const timer = setTimeout(() => {
+      if (!isLoaded) {
+        setShowFallback(true);
+      }
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [canRenderSpline, isLoaded]);
+
   return (
     <Container>
       <div ref={refScrollContainer}>
@@ -207,12 +221,25 @@ export default function Home() {
             id={styles["canvas-container"]}
             className="mt-14 h-full w-full xl:mt-0"
           >
-            {canRenderSpline ? (
+            {/* {canRenderSpline ? (
               <Spline scene="/assets/scene.splinecode" />
             ) : (
               <div className="flex h-full w-full items-center justify-center rounded-3xl border border-muted/40 bg-gradient-to-br from-background to-muted/10 p-8 text-center text-sm text-muted-foreground">
                 3D preview unavailable on this device. Please enable WebGL or try a different browser.
               </div>
+            )} */}
+
+            {canRenderSpline && !showFallback ? (
+              <Spline
+                scene="/assets/scene.splinecode"
+                onLoad={() => setIsLoaded(true)}
+              />
+            ) : (
+              <Image
+                src="hero-fallback.png"
+                alt="Eva Sabeeh"
+                className="h-full w-full object-cover rounded-3xl"
+              />
             )}
           </div>
         </section>
