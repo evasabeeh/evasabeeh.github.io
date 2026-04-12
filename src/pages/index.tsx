@@ -124,6 +124,10 @@ export default function Home() {
   }, [carouselApi]);
 
   useEffect(() => {
+    if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
+      setCanRenderSpline(false);
+      return;
+    }
     if (typeof window === "undefined") return;
     const canvas = document.createElement("canvas");
     const gl = (canvas.getContext("webgl") ?? canvas.getContext("experimental-webgl")) as WebGLRenderingContext | null;
@@ -238,6 +242,8 @@ export default function Home() {
               <Image
                 src="hero-fallback.png"
                 alt="Eva Sabeeh"
+                width={800}
+                height={600}
                 className="h-full w-full object-cover rounded-3xl"
               />
             )}
