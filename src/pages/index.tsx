@@ -37,6 +37,8 @@ export default function Home() {
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
   const [canRenderSpline, setCanRenderSpline] = useState(false);
+  const [showFallback, setShowFallback] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const sections = document.querySelectorAll("section");
@@ -122,11 +124,27 @@ export default function Home() {
   }, [carouselApi]);
 
   useEffect(() => {
+    if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
+      setCanRenderSpline(false);
+      return;
+    }
     if (typeof window === "undefined") return;
     const canvas = document.createElement("canvas");
     const gl = (canvas.getContext("webgl") ?? canvas.getContext("experimental-webgl")) as WebGLRenderingContext | null;
     if (gl && typeof gl.getParameter === "function") setCanRenderSpline(true);
   }, []);
+
+  useEffect(() => {
+    if (!canRenderSpline) return;
+
+    const timer = setTimeout(() => {
+      if (!isLoaded) {
+        setShowFallback(true);
+      }
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [canRenderSpline, isLoaded]);
 
   return (
     <Container>
@@ -207,12 +225,27 @@ export default function Home() {
             id={styles["canvas-container"]}
             className="mt-14 h-full w-full xl:mt-0"
           >
-            {canRenderSpline ? (
+            {/* {canRenderSpline ? (
               <Spline scene="/assets/scene.splinecode" />
             ) : (
               <div className="flex h-full w-full items-center justify-center rounded-3xl border border-muted/40 bg-gradient-to-br from-background to-muted/10 p-8 text-center text-sm text-muted-foreground">
                 3D preview unavailable on this device. Please enable WebGL or try a different browser.
               </div>
+            )} */}
+
+            {canRenderSpline && !showFallback ? (
+              <Spline
+                scene="/assets/scene.splinecode"
+                onLoad={() => setIsLoaded(true)}
+              />
+            ) : (
+              <Image
+                src="hero-fallback.png"
+                alt="Eva Sabeeh"
+                width={800}
+                height={600}
+                className="h-full w-full object-cover rounded-3xl"
+              />
             )}
           </div>
         </section>
